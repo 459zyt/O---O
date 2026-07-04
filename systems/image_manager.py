@@ -25,6 +25,11 @@ class GifAnimation:
             frame_ms = self.durations[self._index] / 1000.0
         return self.frames[self._index]
 
+    @property
+    def current_frame(self):
+        """当前帧（不推进时间）"""
+        return self.frames[self._index]
+
     def get_width(self):
         return self.frames[0].get_width() if self.frames else 1
 

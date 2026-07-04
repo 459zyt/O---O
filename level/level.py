@@ -368,19 +368,21 @@ class Level:
         if lava_height <= 0:
             return
 
-        # 获取 GIF 动画当前帧（支持 lava.gif 循环播放）
+        # 获取 GIF 动画当前帧，缩放到屏幕宽度
         lava_img = None
         if image_mgr:
             anim = image_mgr.get_animation("lava")
-            lava_img = anim.frames[anim._index] if anim else image_mgr.get("lava")
+            if anim:
+                lava_img = anim.current_frame
         if not lava_img:
             lava_img = images.get("lava")
 
         if lava_img:
-            lw, lh = lava_img.get_width(), lava_img.get_height()
+            # 缩放贴图宽度 = 屏幕宽度，保持宽高比
+            lh = lava_img.get_height()
+            scaled = pygame.transform.scale(lava_img, (SCREEN_WIDTH, lh))
             for y in range(lava_top, SCREEN_HEIGHT, lh):
-                for x in range(0, SCREEN_WIDTH, lw):
-                    screen.blit(lava_img, (x, y))
+                screen.blit(scaled, (0, y))
         else:
             for y in range(lava_top, SCREEN_HEIGHT):
                 t = (y - lava_top) / max(1, lava_height)

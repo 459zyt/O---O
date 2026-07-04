@@ -499,9 +499,10 @@ class Game:
         """菜单背景：用天空图片平铺"""
         sky = self.image_mgr.get("sky")
         if sky:
-            for y in range(0, SCREEN_HEIGHT, sky.get_height()):
-                for x in range(0, SCREEN_WIDTH, sky.get_width()):
-                    self.screen.blit(sky, (x, y))
+            sky_h = int(sky.get_height() * SCREEN_WIDTH / sky.get_width())
+            sky_scaled = pygame.transform.scale(sky, (SCREEN_WIDTH, sky_h))
+            for y in range(0, SCREEN_HEIGHT, sky_h):
+                self.screen.blit(sky_scaled, (0, y))
         else:
             self.screen.fill(C_BG)
 
@@ -512,27 +513,34 @@ class Game:
         screen_w, screen_h = SCREEN_WIDTH, SCREEN_HEIGHT
 
         if bg:
+            # 缩放背景图宽度 = 屏幕宽度，保持比例
+            bg_h = int(bg.get_height() * SCREEN_WIDTH / bg.get_width())
+            bg_scaled = pygame.transform.scale(bg, (SCREEN_WIDTH, bg_h))
             # 背景图底部对齐地图底部
             map_bottom_y = self.level.height
             bg_screen_y = map_bottom_y - self.camera.y
-            self.screen.blit(bg, (0, bg_screen_y - bg.get_height()))
+            self.screen.blit(bg_scaled, (0, bg_screen_y - bg_h))
 
-            # 背景图上方用天空填充
+            # 背景图上方用天空填充（天空也缩放到屏幕宽度）
             if sky:
-                sky_top = bg_screen_y - bg.get_height()
+                sky_h = int(sky.get_height() * SCREEN_WIDTH / sky.get_width())
+                sky_scaled = pygame.transform.scale(sky, (SCREEN_WIDTH, sky_h))
+                sky_top = bg_screen_y - bg_h
                 if sky_top > 0:
-                    y = sky_top - sky.get_height()
+                    y = sky_top - sky_h
                     while y < sky_top:
-                        self.screen.blit(sky, (0, int(y)))
-                        y += sky.get_height()
+                        self.screen.blit(sky_scaled, (0, int(y)))
+                        y += sky_h
             elif sky_top > 0:
                 self.screen.fill(C_BG, (0, 0, screen_w, int(sky_top)))
         elif sky:
             # 无背景图：全用天空平铺
-            y = - (self.camera.y % sky.get_height())
+            sky_h = int(sky.get_height() * SCREEN_WIDTH / sky.get_width())
+            sky_scaled = pygame.transform.scale(sky, (SCREEN_WIDTH, sky_h))
+            y = - (self.camera.y % sky_h)
             while y < screen_h:
-                self.screen.blit(sky, (0, int(y)))
-                y += sky.get_height()
+                self.screen.blit(sky_scaled, (0, int(y)))
+                y += sky_h
         else:
             self.screen.fill(C_BG)
 
