@@ -375,7 +375,11 @@ class Game:
             return
 
         # 更新相机
-        self.camera.set_target(self.stick.center_y)
+        # 锚定时跟踪锚点端（固定不动），空中时跟踪质心
+        if self.stick.state == "anchored":
+            self.camera.set_target(self.stick.get_anchor_endpoint()[1])
+        else:
+            self.camera.set_target(self.stick.center_y)
         self.camera.update(dt)
 
         # 屏幕震动衰减
