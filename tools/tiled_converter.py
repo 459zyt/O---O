@@ -110,67 +110,84 @@ def convert_tiled_to_level(tiled_path, output_path=None, check_only=False):
         "objects": [],
     }
 
-    # ── 2. 先收集 Paths 层 ──
+    # ── 2. 先收集所有 Path（按 Class 识别，不限于 Paths 图层） ──
     paths = {}
-    path_objects = []  # 用于重复 path_id 检测
+    path_objects = []
 
     for layer in tiled.get("layers", []):
-        if layer.get("name", "").lower() in ("paths", "path"):
-            for obj in layer.get("objects", []):
+        for obj in layer.get("objects", []):
+            obj_class = obj.get("type", "")
+            if obj_class == "Path":
                 props = _props_to_dict(obj.get("properties", []))
                 pid = props.get("path_id", "")
                 if pid:
                     if pid in paths:
-                        warnings.add("E04", f"Paths 层存在重复 path_id: {pid}")
+                        warnings.add("E04", f"重复 path_id: {pid}")
                     paths[pid] = _convert_polyline(obj)
                     path_objects.append(pid)
 
-    # ── 3. 解析各对象层 ──
+    # ── 3. 解析所有对象（按 Class 优先，图层名仅作 fallback） ──
     player_count = 0
 
     for layer in tiled.get("layers", []):
-        layer_name = layer.get("name", "")
-        layer_lower = layer_name.lower()
-
         for obj in layer.get("objects", []):
-            # 获取 Tiled 的 type 字段 (Class 名称)
             obj_class = obj.get("type", "")
             props = _props_to_dict(obj.get("properties", []))
 
-            # Player 层 → PlayerStart
-            if layer_lower in ("player", "players", "spawn"):
+            # 按 Class 识别（主路径，不限图层）
+            if obj_class == "PlayerStart":
                 player_count += 1
                 level["player_start"] = _convert_player_start(obj, props)
                 continue
 
-            # Walls 层 → Wall
-            if layer_lower in ("walls", "wall") or obj_class == "Wall":
+            if obj_class == "Wall":
                 wall_obj = _convert_wall(obj, props, paths, warnings)
                 if wall_obj:
                     level["objects"].append(wall_obj)
                 continue
 
-            # Items 层 → Item
-            if layer_lower in ("items", "item") or obj_class == "Item":
+            if obj_class == "Item":
                 item_obj = _convert_item(obj, props, warnings)
                 if item_obj:
                     level["objects"].append(item_obj)
                 continue
 
-            # Hazards 层 → Hazard
-            if layer_lower in ("hazards", "hazard") or obj_class == "Hazard":
+            if obj_class == "Hazard":
                 hazard_obj = _convert_hazard(obj, props, warnings)
                 if hazard_obj:
                     level["objects"].append(hazard_obj)
                 continue
 
-            # Paths 层 → 已经处理
-            if layer_lower in ("paths", "path") or obj_class == "Path":
+            if obj_class == "Path":
+                continue  # step 2 已处理
+
+            # Fallback: 按图层名推断（无 Class 的旧格式对象）
+            layer_lower = layer.get("name", "").lower()
+            if layer_lower in ("player", "players", "spawn"):
+                player_count += 1
+                level["player_start"] = _convert_player_start(obj, props)
+                continue
+            if layer_lower in ("walls", "wall"):
+                wall_obj = _convert_wall(obj, props, paths, warnings)
+                if wall_obj:
+                    level["objects"].append(wall_obj)
+                continue
+            if layer_lower in ("items", "item"):
+                item_obj = _convert_item(obj, props, warnings)
+                if item_obj:
+                    level["objects"].append(item_obj)
+                continue
+            if layer_lower in ("hazards", "hazard"):
+                hazard_obj = _convert_hazard(obj, props, warnings)
+                if hazard_obj:
+                    level["objects"].append(hazard_obj)
+                continue
+            if layer_lower in ("paths", "path"):
                 continue
 
-            # 未知对象 — 只警告
-            if obj_class and obj_class not in ("", "Wall", "Item", "Hazard", "PlayerStart", "Path"):
-                warnings.add("E11", f"{layer_name} 层对象 id={obj.get('id')}: 未知 Class={obj_class}")
+            # 完全未知
+            if obj_class:
+                warnings.add("E11", f"{layer.get('name')} 层 id={obj.get('id')}: 未知 Class={obj_class}")
 
     # ── 4. 校验 ──
     if player_count != 1:
@@ -300,12 +317,19 @@ def _to_float(val, default=0.0):
 # ================================================================
 
 def _convert_polyline(obj):
-    """Polyline → 世界坐标点列表"""
+    """Polyline → 世界坐标点列表（支持旋转）"""
     base_x = obj.get("x", 0)
     base_y = obj.get("y", 0)
+    rotation = math.radians(obj.get("rotation", 0))
+    cos_r, sin_r = math.cos(rotation), math.sin(rotation)
     points = []
     for p in obj.get("polyline", []):
-        points.append([base_x + p.get("x", 0), base_y + p.get("y", 0)])
+        px = p.get("x", 0)
+        py = p.get("y", 0)
+        # 旋转局部坐标
+        rx = px * cos_r - py * sin_r
+        ry = px * sin_r + py * cos_r
+        points.append([base_x + rx, base_y + ry])
     return points
 
 
