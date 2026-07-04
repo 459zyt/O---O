@@ -1,124 +1,839 @@
-{
-  "backgroundcolor": "#1a1528",
-  "height": 35,
-  "infinite": false,
-  "layers": [
-    {
-      "draworder": "topdown",
-      "id": 6,
-      "name": "Decorations",
-      "objects": [],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "draworder": "topdown",
-      "id": 5,
-      "name": "Paths",
-      "objects": [],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "draworder": "topdown",
-      "id": 4,
-      "name": "Hazards",
-      "objects": [],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "draworder": "topdown",
-      "id": 3,
-      "name": "Items",
-      "objects": [],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "draworder": "topdown",
-      "id": 2,
-      "name": "Walls",
-      "objects": [
+{ "backgroundcolor":"#1a1528",
+ "compressionlevel":-1,
+ "height":60,
+ "infinite":false,
+ "layers":[
         {
-          "height": 32,
-          "id": 1,
-          "name": "wall_start",
-          "type": "Wall",
-          "rotation": 0,
-          "visible": true,
-          "width": 352,
-          "x": 128,
-          "y": 1056,
-          "properties": [
-            { "name": "wall_type", "type": "string", "value": "normal" },
-            { "name": "isSolid", "type": "bool", "value": true }
-          ]
-        }
-      ],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "draworder": "topdown",
-      "id": 1,
-      "name": "Player",
-      "objects": [
+         "draworder":"topdown",
+         "id":6,
+         "name":"Decorations",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
         {
-          "height": 0,
-          "id": 100,
-          "name": "spawn",
-          "point": true,
-          "type": "PlayerStart",
-          "rotation": 0,
-          "visible": true,
-          "width": 0,
-          "x": 288,
-          "y": 1072,
-          "properties": [
-            { "name": "angle", "type": "float", "value": 270 },
-            { "name": "anchor_side", "type": "string", "value": "left" }
-          ]
-        }
-      ],
-      "opacity": 1,
-      "type": "objectgroup",
-      "visible": true,
-      "x": 0,
-      "y": 0
-    }
-  ],
-  "nextlayerid": 7,
-  "nextobjectid": 200,
-  "orientation": "orthogonal",
-  "properties": [
-    { "name": "level_id", "type": "string", "value": "level1" },
-    { "name": "level_name", "type": "string", "value": "First Oopz" },
-    { "name": "background", "type": "file", "value": "arts/backgrounds/level_01_bg.png" },
-    { "name": "lava_enabled", "type": "bool", "value": true },
-    { "name": "lava_start_y", "type": "float", "value": 1100 },
-    { "name": "lava_rise_speed", "type": "float", "value": 25 }
-  ],
-  "renderorder": "right-down",
-  "tiledversion": "1.10",
-  "tileheight": 32,
-  "tilewidth": 32,
-  "type": "map",
-  "version": "1.10",
-  "width": 20
+         "draworder":"topdown",
+         "id":5,
+         "name":"Paths",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":4,
+         "name":"Hazards",
+         "objects":[
+                {
+                 "height":111,
+                 "id":118,
+                 "name":"hazard_spikes",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/danger_wall.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnTouch"
+                        }],
+                 "rotation":0,
+                 "type":"Hazard",
+                 "visible":true,
+                 "width":99,
+                 "x":458,
+                 "y":1579
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"Items",
+         "objects":[
+                {
+                 "height":77,
+                 "id":112,
+                 "name":"item_length_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"LengthUp"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/length_up.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }, 
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":640
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":101,
+                 "x":304,
+                 "y":1700
+                }, 
+                {
+                 "height":83,
+                 "id":113,
+                 "name":"item_speed_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"SpeedUp"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/speed_up.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }, 
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":0.3
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":83,
+                 "x":304,
+                 "y":1380
+                }, 
+                {
+                 "height":64,
+                 "id":114,
+                 "name":"item_checkpoint",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"checkpoint_id",
+                         "type":"string",
+                         "value":"cp_001"
+                        }, 
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"Checkpoint"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/checkpoint.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnTouch"
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":64,
+                 "x":288,
+                 "y":940
+                }, 
+                {
+                 "height":78,
+                 "id":115,
+                 "name":"item_speed_down",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"SpeedDown"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/speed_down.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }, 
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":0.3
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":82,
+                 "x":304,
+                 "y":700
+                }, 
+                {
+                 "height":60,
+                 "id":116,
+                 "name":"item_length_down",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"LengthDown"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/length_down.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }, 
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":30
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":76,
+                 "x":304,
+                 "y":620
+                }, 
+                {
+                 "height":80,
+                 "id":117,
+                 "name":"item_key",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"KeyPair"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/key.png"
+                        }, 
+                        {
+                         "name":"key_pair_id",
+                         "type":"string",
+                         "value":"key_final"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":71,
+                 "x":304,
+                 "y":500
+                }, 
+                {
+                 "height":0,
+                 "id":152,
+                 "name":"path_01",
+                 "opacity":1,
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":160,
+                         "y":0
+                        }],
+                 "properties":[
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_01"
+                        }],
+                 "rotation":0,
+                 "type":"Path",
+                 "visible":true,
+                 "width":0,
+                 "x":235.151515151515,
+                 "y":1118.24242424242
+                }, 
+                {
+                 "height":32,
+                 "id":153,
+                 "name":"wall_normal",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":235.151515151515,
+                 "y":1678.24242424242
+                }, 
+                {
+                 "height":32,
+                 "id":154,
+                 "name":"wall_fragile",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"fragile",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/fragile_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"fragile"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":235.151515151515,
+                 "y":1518.24242424242
+                }, 
+                {
+                 "height":32,
+                 "id":155,
+                 "name":"wall_ghost",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":235.151515151515,
+                 "y":1358.24242424242
+                }, 
+                {
+                 "height":32,
+                 "id":156,
+                 "name":"wall_beat_switch",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"beat_solid_switch",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"switchSecond",
+                         "type":"float",
+                         "value":2
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":235.151515151515,
+                 "y":1238.24242424242
+                }, 
+                {
+                 "height":32,
+                 "id":157,
+                 "name":"wall_moving",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"move_speed",
+                         "type":"float",
+                         "value":60
+                        }, 
+                        {
+                         "name":"move_strategy",
+                         "propertytype":"MoveStrategy",
+                         "type":"string",
+                         "value":"pingpong"
+                        }, 
+                        {
+                         "name":"moving",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_01"
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":235.151515151515,
+                 "y":1118.24242424242
+                }, 
+                {
+                 "height":32,
+                 "id":158,
+                 "name":"wall_unstable",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"max_tilt_angle",
+                         "type":"float",
+                         "value":35
+                        }, 
+                        {
+                         "name":"tilt_direction",
+                         "propertytype":"TiltDirection",
+                         "type":"string",
+                         "value":"both"
+                        }, 
+                        {
+                         "name":"unstable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":235.151515151515,
+                 "y":878.242424242424
+                }, 
+                {
+                 "height":168,
+                 "id":159,
+                 "name":"wall_keypair_goal",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"key_pair_id",
+                         "type":"string",
+                         "value":"key_final"
+                        }, 
+                        {
+                         "name":"key_pair_result",
+                         "propertytype":"KeyPairResult",
+                         "type":"string",
+                         "value":"solid"
+                        }, 
+                        {
+                         "name":"key_pair_solid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"goal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":129,
+                 "x":109.151515151515,
+                 "y":389.242424242424
+                }, 
+                {
+                 "height":32,
+                 "id":160,
+                 "name":"wall_landing",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":235.151515151515,
+                 "y":258.242424242424
+                }, 
+                {
+                 "height":78,
+                 "id":161,
+                 "name":"wall_goal",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"goal",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/goal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"goal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":152,
+                 "x":240.151515151515,
+                 "y":96.2424242424242
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":2,
+         "locked":true,
+         "name":"Walls",
+         "objects":[
+                {
+                 "height":32,
+                 "id":102,
+                 "name":"platform_start",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":352,
+                 "x":144,
+                 "y":1800
+                }, 
+                {
+                 "height":1892,
+                 "id":120,
+                 "name":"platform_start",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":94,
+                 "x":412,
+                 "y":-64
+                }, 
+                {
+                 "height":1892,
+                 "id":121,
+                 "name":"platform_start",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":94,
+                 "x":266.575757575758,
+                 "y":-115.939393939394
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":1,
+         "name":"Player",
+         "objects":[
+                {
+                 "height":0,
+                 "id":101,
+                 "name":"spawn",
+                 "opacity":1,
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"anchor_side",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"angle",
+                         "type":"float",
+                         "value":270
+                        }],
+                 "rotation":0,
+                 "type":"PlayerStart",
+                 "visible":true,
+                 "width":0,
+                 "x":304,
+                 "y":1850
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":7,
+ "nextobjectid":162,
+ "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"background",
+         "type":"file",
+         "value":"arts\/backgrounds\/level_01_bg.png"
+        }, 
+        {
+         "name":"lava_enabled",
+         "type":"bool",
+         "value":true
+        }, 
+        {
+         "name":"lava_rise_speed",
+         "type":"float",
+         "value":25
+        }, 
+        {
+         "name":"lava_start_y",
+         "type":"float",
+         "value":1850
+        }, 
+        {
+         "name":"level_id",
+         "type":"string",
+         "value":"level1"
+        }, 
+        {
+         "name":"level_name",
+         "type":"string",
+         "value":"Prefab Test"
+        }],
+ "renderorder":"right-down",
+ "tiledversion":"1.12.2",
+ "tileheight":32,
+ "tilesets":[],
+ "tilewidth":32,
+ "type":"map",
+ "version":"1.11",
+ "width":20
 }
