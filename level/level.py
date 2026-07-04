@@ -147,8 +147,10 @@ class Level:
         钥匙:    KeyPair → trigger_key_pair()
         """
         if item.effect == "Checkpoint":
-            self.checkpoint_manager.activate_checkpoint(self, stick, item)
-            return  # checkpoint 不消失，不调用 stick.apply_item()
+            # 只有锚定在墙上时才能存档，空中碰到不记录
+            if stick.state == "anchored":
+                self.checkpoint_manager.activate_checkpoint(self, stick, item)
+            return
 
         if item.effect == "KeyPair":
             if item.key_pair_id:
@@ -179,6 +181,10 @@ class Level:
             if item_obj.trigger_condition != "OnTouch":
                 continue
             if not item_obj.active:
+                continue
+
+            # 只有锚定在墙上时才能存档（空中碰到不记录）
+            if stick.state != "anchored":
                 continue
 
             # 检测棍子碰撞
