@@ -153,9 +153,18 @@ class Stick:
             wall, wall_x, wall_y = wall_result
 
             # === 从旧墙壁脱锚 ===
+            was_airborne = (self.state == "airborne")
             self._detach_from_current_wall()
 
-            # === 计算空中速度（用于后续可能的脱落） ===
+            # 脱锚可能触发了旧墙碎裂（脆弱墙）。如果新墙正是同一面墙，
+            # 它已经在 _detach_from_current_wall 中被设为 active=False，
+            # 此时应视为抓空而非重新抓住已碎的墙。
+            if not wall.active:
+                self.state = "airborne"
+                self.anchor_side = new_anchor_side
+                anchor_result = "anchor_miss"
+                item_str = item_result[0] if item_result else None
+                return (anchor_result, item_str)
             if self.state == "anchored":
                 # 这不应该发生（刚 detach 了），但保守处理
                 self._compute_airborne_velocity()
@@ -163,16 +172,32 @@ class Stick:
             # === 抓住新墙壁 ===
             self.state = "anchored"
             self.anchor_side = new_anchor_side
-            self.anchor_x = wall_x
-            self.anchor_y = wall_y
+
+            if was_airborne:
+                # 从空中抓墙：保持中心和角度不变，从中心反算锚点位置
+                # 避免旋转轴从质心跳到锚点导致的视觉突变
+                dx, dy = self._direction()
+                hl = self.length / 2
+                if self.anchor_side == 0:
+                    self.anchor_x = self.center_x + hl * dx
+                    self.anchor_y = self.center_y + hl * dy
+                else:
+                    self.anchor_x = self.center_x - hl * dx
+                    self.anchor_y = self.center_y - hl * dy
+                # 夹紧到墙壁内
+                self.anchor_x, self.anchor_y = wall.clamp_point(self.anchor_x, self.anchor_y)
+            else:
+                # 从锚定切换锚定：锚点位置由墙壁决定
+                self.anchor_x = wall_x
+                self.anchor_y = wall_y
+                self._update_center_from_anchor()
+
             self.attached_wall = wall
-            self.anchor_local_pos = wall.world_to_local((wall_x, wall_y))
+            self.anchor_local_pos = wall.world_to_local((self.anchor_x, self.anchor_y))
 
             # 通知墙壁组件（GoalComponent 发事件，UnstableComponent 记录锚点等）
-            wall.on_anchor_attached(self, (wall_x, wall_y))
+            wall.on_anchor_attached(self, (self.anchor_x, self.anchor_y))
 
-            # 更新中心位置
-            self._update_center_from_anchor()
             self.velocity_x = 0.0
             self.velocity_y = 0.0
 
@@ -198,8 +223,10 @@ class Stick:
         item_obj = item_result[1] if item_result else None
         item_str = item_result[0] if item_result else None
 
-        # KeyPair 钥匙道具：直接在 level 中触发，不走 stick.apply_item()
-        if item_obj is not None and item_obj.effect == "KeyPair":
+        # JSON-loaded 道具（有 item_obj）：统一走 level.apply_item_to_stick()
+        # 这样 Tiled 中设置的自定义 value 才会生效（不走 ITEM_CONFIG 硬编码值）
+        # 文本地图道具（item_obj=None）：走旧路径 Game._handle_game_event
+        if item_obj is not None:
             level.apply_item_to_stick(self, item_obj)
             item_str = None  # 不传给 Game 处理
 

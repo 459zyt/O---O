@@ -73,7 +73,8 @@
             "useAs": ["object"],
             "members": [
                 { "name": "wall_type",        "propertyType": "WallType", "type": "string", "value": "normal" },
-                { "name": "image",            "type": "file",   "value": "" },
+                { "name": "image_solid",      "type": "file",   "value": "" },
+                { "name": "image_ghost",      "type": "file",   "value": "" },
                 { "name": "isSolid",          "type": "bool",   "value": true },
 
                 { "name": "fragile",          "type": "bool",   "value": false },

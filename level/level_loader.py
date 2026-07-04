@@ -46,7 +46,6 @@ class LevelLoader:
         # 1. 优先尝试 level.json（Tiled 导出格式）
         if os.path.exists(json_path):
             level, meta = LevelLoader._load_from_json(json_path, level_id)
-            LevelLoader._generate_needs_file(level, meta)
             return level
 
         # 2. 回退到 map.txt + meta.json（ASCII 格式）
@@ -54,116 +53,9 @@ class LevelLoader:
         meta_path = os.path.join(folder, "meta.json")
         if os.path.exists(map_path):
             level, meta = LevelLoader._load_from_txt(map_path, meta_path, level_id)
-            LevelLoader._generate_needs_file(level, meta)
             return level
 
         raise FileNotFoundError(f"找不到关卡文件: {folder}/level.json 或 map.txt")
-
-    # ================================================================
-    #  needs 文件生成 — 美术设计师参考用
-    # ================================================================
-
-    @staticmethod
-    def _generate_needs_file(level, meta):
-        """
-        在 arts/needs/<level_id>_needs.json 生成背景图片需求规格。
-        内容包含:
-          - 关卡世界的实际尺寸
-          - 游戏窗口（摄像机视野）大小
-          - 摄像机滚动范围
-          - 建议的背景图片尺寸
-          - 玩家出生点
-        """
-        level_id = meta.get("level_id", "unknown")
-        level_name = meta.get("name", "Untitled")
-
-        needs_dir = "arts/needs"
-        os.makedirs(needs_dir, exist_ok=True)
-
-        # 摄像机滚动范围
-        camera_min_y = 0.0
-        camera_max_y = max(0.0, level.height - SCREEN_HEIGHT)
-
-        # 推荐背景图尺寸（通常等于世界大小，或屏幕大小 × 视差倍数）
-        parallax_factor = 1.0  # 无 parallax 时为 1
-
-        needs = {
-            "_comment": (
-                f"【{level_name}】背景图片需求规格 — 由系统自动生成\n"
-                "请根据以下尺寸绘制背景图，放入 arts/backgrounds/ 目录。\n"
-                "如果在 Tiled 中设置了 background 属性，请确保背景图覆盖整个地图区域。"
-            ),
-            "level": {
-                "id": level_id,
-                "name": level_name,
-            },
-            "world": {
-                "width_px": level.width,
-                "height_px": level.height,
-                "tile_size": level.tile_size,
-                "cols": level.width // level.tile_size,
-                "rows": level.height // level.tile_size,
-            },
-            "camera": {
-                "viewport_width": SCREEN_WIDTH,
-                "viewport_height": SCREEN_HEIGHT,
-                "scroll_range_y": {
-                    "min": int(camera_min_y),
-                    "max": int(camera_max_y),
-                    "description": "摄像机在 Y 轴上的滚动范围（世界坐标）"
-                },
-                "player_screen_position": (
-                    "屏幕上方约 35% 处，"
-                    "即 camera.y ≈ player.y - screen_height × 0.35"
-                ),
-            },
-            "background": {
-                "recommended_width_px": level.width,
-                "recommended_height_px": level.height,
-                "recommended_file": f"arts/backgrounds/{level_id}_bg.png",
-                "note": (
-                    f"背景图建议尺寸为 {level.width}×{level.height} 像素，"
-                    f"覆盖整个地图区域。\n"
-                    f"如果需要视差滚动，宽度 = 屏幕宽度 × {parallax_factor + 1}。\n"
-                    f"当前摄像机视野: {SCREEN_WIDTH}×{SCREEN_HEIGHT} 像素。"
-                ),
-            },
-            "player_start": {
-                "x": level.player_start[0],
-                "y": level.player_start[1],
-            },
-            "lava": {
-                "start_y": int(level.lava_y),
-                "rise_speed": level.lava_rise_speed,
-            },
-        }
-
-        needs_path = os.path.join(needs_dir, f"{level_id}_needs.json")
-        with open(needs_path, "w", encoding="utf-8") as f:
-            json.dump(needs, f, indent=2, ensure_ascii=False)
-
-        # 同时生成一个人类可读的 txt 版本
-        txt_path = os.path.join(needs_dir, f"{level_id}_needs.txt")
-        with open(txt_path, "w", encoding="utf-8") as f:
-            f.write(f"═══════════════════════════════════════\n")
-            f.write(f"  {level_name} ({level_id}) 背景图片需求\n")
-            f.write(f"═══════════════════════════════════════\n\n")
-            f.write(f"地图尺寸: {level.width} × {level.height} px\n")
-            f.write(f"格子大小: {level.tile_size} px\n")
-            f.write(f"屏幕视野: {SCREEN_WIDTH} × {SCREEN_HEIGHT} px\n")
-            f.write(f"摄像机 Y 滚动范围: {int(camera_min_y)} ~ {int(camera_max_y)}\n")
-            f.write(f"玩家出生点: ({level.player_start[0]}, {level.player_start[1]})\n\n")
-            f.write(f"推荐背景图:\n")
-            f.write(f"  尺寸: {level.width} × {level.height} px\n")
-            f.write(f"  路径: arts/backgrounds/{level_id}_bg.png\n\n")
-            f.write(f"注意事项:\n")
-            f.write(f"  - 背景图应覆盖整个地图区域\n")
-            f.write(f"  - 背景图顶部 (y=0) 对应对关卡的顶部\n")
-            f.write(f"  - 背景图底部 (y={level.height}) 对应关卡底部\n")
-            f.write(f"  - 摄像机视野范围内会被玩家看到\n")
-
-        print(f"[LevelLoader] 已生成: {needs_path}")
-        print(f"[LevelLoader] 已生成: {txt_path}")
 
     # ================================================================
     #  level.json 加载（Tiled 对象格式）
@@ -232,6 +124,10 @@ class LevelLoader:
         if "fragile" in components: wall_type = "fragile"
 
         wall = Wall(x, y, w, h, wall_type, isSolid=is_solid)
+
+        # 自定义外观（设计师在 Tiled 中选图）
+        wall.appearance_solid = obj.get("image_solid", "")
+        wall.appearance_ghost = obj.get("image_ghost", "")
 
         # === 装配组件（核心：Tiled 属性 → 游戏行为） ===
         from entities.wall import create_component

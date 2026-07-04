@@ -109,8 +109,11 @@ class Level:
             item_key = (rect.x, rect.y, etype)
             if item_key in self.consumed_items:
                 continue
+            # 精确碰撞：道具范围由地图设计师在 Tiled 中手动拖拽决定
             if rect.collidepoint(x, y):
-                self.consumed_items.add(item_key)
+                # 存档点和钥匙不加入 consumed_items——它们通过 item.active 控制可见性
+                if etype not in ("Checkpoint", "KeyPair"):
+                    self.consumed_items.add(item_key)
                 return (f"item_{etype}", item_obj)
         return None
 
@@ -283,25 +286,30 @@ class Level:
             if sy + self.tile_size < 0 or sy > SCREEN_HEIGHT:
                 continue
 
-            # KeyPair 钥匙：使用钥匙贴图
+            # KeyPair 钥匙：平铺贴图
             if etype == "KeyPair":
                 key_img = images.get("key")
                 if key_img:
-                    screen.blit(key_img, (sx, sy))
+                    iw, ih = key_img.get_width(), key_img.get_height()
+                    for tx in range(sx, sx + rect.width, iw):
+                        for ty in range(sy, sy + rect.height, ih):
+                            screen.blit(key_img, (tx, ty))
                 else:
                     pygame.draw.circle(screen, (255, 220, 60),
-                                       (sx + self.tile_size // 2, sy + self.tile_size // 2),
-                                       self.tile_size // 2 - 2)
+                                       (sx + rect.width // 2, sy + rect.height // 2),
+                                       min(rect.width, rect.height) // 2 - 2)
                 continue
 
-            # Checkpoint 存档点：使用存档点贴图 + 激活发光
+            # Checkpoint 存档点：平铺贴图 + 激活发光
             if etype == "Checkpoint":
                 cp_img = images.get("checkpoint")
                 if cp_img:
-                    cp_scaled = pygame.transform.scale(cp_img, (rect.width, rect.height))
-                    screen.blit(cp_scaled, (sx, sy))
+                    iw, ih = cp_img.get_width(), cp_img.get_height()
+                    for tx in range(sx, sx + rect.width, iw):
+                        for ty in range(sy, sy + rect.height, ih):
+                            screen.blit(cp_img, (tx, ty))
                 else:
-                    pygame.draw.rect(screen, (100, 200, 255), (sx + 2, sy + 2, rect.width - 4, rect.height - 4), border_radius=4)
+                    pygame.draw.rect(screen, (100, 200, 255), (sx, sy, rect.width, rect.height), border_radius=4)
                 # 激活存档点发光
                 if item_obj and self.checkpoint_manager.active_checkpoint_id == item_obj.checkpoint_id:
                     glow = pygame.Surface((rect.width + 8, rect.height + 8), pygame.SRCALPHA)
@@ -311,26 +319,34 @@ class Level:
 
             img = item_images.get(etype)
             if img:
-                screen.blit(img, (sx, sy))
+                # 平铺贴图覆盖整个道具区域（设计师可拖拽任意尺寸）
+                iw, ih = img.get_width(), img.get_height()
+                for tx in range(sx, sx + rect.width, iw):
+                    for ty in range(sy, sy + rect.height, ih):
+                        screen.blit(img, (tx, ty))
             else:
                 color_map = {"LengthUp": C_GREEN, "LengthDown": C_RED,
                              "SpeedUp": (60, 140, 255), "SpeedDown": (180, 100, 255)}
                 pygame.draw.rect(screen, color_map.get(etype, C_WHITE),
-                                 (sx + 4, sy + 4, self.tile_size - 8, self.tile_size - 8),
+                                 (sx + 4, sy + 4, rect.width - 8, rect.height - 8),
                                  border_radius=4)
 
         # 危险物
         hazard_img = images.get("hazard")
         for rect in self.hazards:
             sx, sy = int(rect.x), int(rect.y - camera_y)
-            if sy + self.tile_size < 0 or sy > SCREEN_HEIGHT:
+            if sy + rect.height < 0 or sy > SCREEN_HEIGHT:
                 continue
             if hazard_img:
-                screen.blit(hazard_img, (sx, sy))
+                # 平铺贴图覆盖整个障碍物区域
+                iw, ih = hazard_img.get_width(), hazard_img.get_height()
+                for tx in range(sx, sx + rect.width, iw):
+                    for ty in range(sy, sy + rect.height, ih):
+                        screen.blit(hazard_img, (tx, ty))
             else:
                 pygame.draw.circle(screen, C_RED,
-                                   (sx + self.tile_size // 2, sy + self.tile_size // 2),
-                                   self.tile_size // 2 - 2)
+                                   (sx + rect.width // 2, sy + rect.height // 2),
+                                   min(rect.width, rect.height) // 2 - 2)
 
         # 岩浆
         self._draw_lava(screen, camera_y, images)

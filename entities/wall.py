@@ -658,6 +658,45 @@ class KeyPairSolidComponent(WallComponent):
 
 
 # ================================================================
+#  贴图加载辅助
+# ================================================================
+
+def _try_load_image(path):
+    """
+    加载贴图。始终从项目根目录的 arts/ 出发搜索，不依赖 Tiled 存储的
+    相对路径（Tiled 存的是 ../ 相对于 map 文件的路径，打包后无效）。
+    """
+    import os as _os
+    if not path:
+        return None
+
+    # 方案1：剥离 ../ 前缀后直接从 cwd 加载（适用于开发环境）
+    clean = path.replace("\\", "/")
+    while clean.startswith("../"):
+        clean = clean[3:]
+    try:
+        return pygame.image.load(clean).convert_alpha()
+    except Exception:
+        pass
+
+    # 方案2：在 arts/ 下按文件名搜索（适用于打包后）
+    filename = _os.path.basename(path)
+    if filename:
+        arts_dir = _os.path.join(_os.getcwd(), "arts")
+        if _os.path.isdir(arts_dir):
+            for root, _dirs, files in _os.walk(arts_dir):
+                if filename in files:
+                    try:
+                        return pygame.image.load(
+                            _os.path.join(root, filename)).convert_alpha()
+                    except Exception:
+                        continue
+
+    print(f"[Wall] cannot load custom image: {path}")
+    return None
+
+
+# ================================================================
 #  组件工厂
 # ================================================================
 
@@ -792,7 +831,11 @@ class Wall:
     # __slots__ 减少内存开销，每个 Wall 实例只有这些属性
     __slots__ = (
         'id', 'x', 'y', 'width', 'height', 'wall_type',
-        'angle', 'active', 'appearance', 'prefab',
+        'angle', 'active', 'prefab',
+
+        # 自定义外观贴图（设计师在 Tiled 中通过 file 选择器指定）
+        'appearance_solid',   # 实线墙贴图（isSolid=True）
+        'appearance_ghost',   # 虚线墙贴图（isSolid=False）
 
         # 是否是实体墙。
         # True  = 实线墙，可以被棍子抓住。
@@ -857,8 +900,9 @@ class Wall:
         self.solid_locked = False
 
         # ---- 外观 ----
-        # 贴图路径（可选）
-        self.appearance = None
+        # 贴图路径（可选）— 设计师在 Tiled 中通过 file 选择器指定
+        self.appearance_solid = ""   # 实线墙贴图路径（isSolid=True 时使用）
+        self.appearance_ghost = ""   # 虚线墙贴图路径（isSolid=False 时使用）
         # 预制体名（如 "normal_wall"）
         self.prefab = f"{wall_type}_wall"
 
@@ -1210,7 +1254,7 @@ class Wall:
 
         # === 虚线墙：半透明虚线绘制 ===
         if not self.isSolid:
-            self._draw_ghost_wall(screen, camera_y)
+            self._draw_ghost_wall(screen, camera_y, images)
             return
 
         # wall_type → image key
@@ -1231,13 +1275,22 @@ class Wall:
         if sy + h < 0 or sy > screen_h:
             return
 
-        if img:
+        # 优先使用设计师自定义贴图（Tiled image_solid 属性）
+        custom_img = None
+        if self.appearance_solid:
+            custom_img = images.get(f"_custom_{self.id}_solid")
+            if custom_img is None:
+                custom_img = _try_load_image(self.appearance_solid)
+                if custom_img:
+                    images[f"_custom_{self.id}_solid"] = custom_img
+
+        draw_img = custom_img or img
+        if draw_img:
             # === 贴图平铺 ===
-            iw, ih = img.get_width(), img.get_height()
-            # 以贴图尺寸为步长水平+垂直平铺
+            iw, ih = draw_img.get_width(), draw_img.get_height()
             for tx in range(sx, sx + w, iw):
                 for ty in range(sy, sy + h, ih):
-                    screen.blit(img, (tx, ty))
+                    screen.blit(draw_img, (tx, ty))
         else:
             # === 纯色兜底 ===
             colors = {
@@ -1258,14 +1311,14 @@ class Wall:
             glow.fill((255, 220, 60, glow_alpha))  # 金色半透明
             screen.blit(glow, (sx - 4, sy - 4))
 
-    def _draw_ghost_wall(self, screen, camera_y):
+    def _draw_ghost_wall(self, screen, camera_y, images=None):
         """
         绘制虚线墙 / 虚体墙。
 
         特点：
         - 仍然显示在地图中
         - 不能被棍子抓住
-        - 淡蓝色半透明填充 + 虚线边框
+        - 若有自定义 ghost 贴图，使用半透明贴图；否则淡蓝填充 + 虚线边框
         """
         sx = int(self.x)
         sy = int(self.y - camera_y)
@@ -1276,17 +1329,51 @@ class Wall:
         if sy + h < 0 or sy > screen_h:
             return
 
-        # 半透明填充
+        # 优先使用设计师自定义 ghost 贴图
+        ghost_img = None
+        if self.appearance_ghost and images is not None:
+            cache_key = f"_custom_{self.id}_ghost"
+            ghost_img = images.get(cache_key)
+            if ghost_img is None:
+                ghost_img = _try_load_image(self.appearance_ghost)
+                if ghost_img:
+                    images[cache_key] = ghost_img
+
+        if ghost_img:
+            # 半透明平铺自定义贴图
+            ghost_surf = pygame.Surface((w, h), pygame.SRCALPHA)
+            iw, ih = ghost_img.get_width(), ghost_img.get_height()
+            for tx in range(0, w, iw):
+                for ty in range(0, h, ih):
+                    ghost_surf.blit(ghost_img, (tx, ty))
+            ghost_surf.set_alpha(128)  # 透明度 0.5
+            screen.blit(ghost_surf, (sx, sy))
+            # 仍画虚线边框
+            color = (150, 210, 255, 140)
+            dash = 8; gap = 6
+            x = sx
+            while x < sx + w:
+                end_x = min(x + dash, sx + w)
+                pygame.draw.line(screen, color, (x, sy), (end_x, sy), 2)
+                pygame.draw.line(screen, color, (x, sy + h), (end_x, sy + h), 2)
+                x += dash + gap
+            y = sy
+            while y < sy + h:
+                end_y = min(y + dash, sy + h)
+                pygame.draw.line(screen, color, (sx, y), (sx, end_y), 2)
+                pygame.draw.line(screen, color, (sx + w, y), (sx + w, end_y), 2)
+                y += dash + gap
+            return
+
+        # 兜底：淡蓝色半透明填充 + 虚线边框
         surf = pygame.Surface((w, h), pygame.SRCALPHA)
-        surf.fill((120, 180, 255, 35))
+        surf.fill((120, 180, 255, 128))  # 透明度 0.5
         screen.blit(surf, (sx, sy))
 
-        # 虚线边框
         color = (150, 210, 255, 140)
         dash = 8
         gap = 6
 
-        # 上边 + 下边
         x = sx
         while x < sx + w:
             end_x = min(x + dash, sx + w)
@@ -1294,7 +1381,6 @@ class Wall:
             pygame.draw.line(screen, color, (x, sy + h), (end_x, sy + h), 2)
             x += dash + gap
 
-        # 左边 + 右边
         y = sy
         while y < sy + h:
             end_y = min(y + dash, sy + h)

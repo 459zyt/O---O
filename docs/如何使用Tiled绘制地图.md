@@ -77,6 +77,8 @@
 | 属性 | 交互 | 说明 |
 |------|------|------|
 | `wall_type` | 下拉 | `normal`=普通 / `fragile`=脆弱 / `goal`=终点 |
+| `image_solid` | 文件选择器 | 实线状态贴图（isSolid=True 时显示），支持任意尺寸，自动平铺 |
+| `image_ghost` | 文件选择器 | 虚线状态贴图（isSolid=False 时显示），半透明渲染，自动平铺 |
 | `isSolid` | 复选框 | 初始是实体墙还是虚线墙 |
 | `fragile` | 复选框 | 勾选后，锚点离开墙壁即碎裂 |
 | `goal` | 复选框 | 勾选后，抓住即通关 |
@@ -115,6 +117,7 @@
 | 属性 | 交互 | 说明 |
 |------|------|------|
 | `effect` | 下拉 | 道具效果，6 选 1 |
+| `image` | 文件选择器 | 道具贴图（为空则用默认贴图） |
 | `value` | 数字 | 效果数值（长度变化量/速度倍率） |
 | `trigger_condition` | 下拉 | `OnAnchor`=抓住触发 / `OnTouch`=碰到触发 |
 | `consume_on_trigger` | 复选框 | 触发后是否消失 |
@@ -141,6 +144,11 @@
 | **放在哪** | `Hazards` 图层 |
 | **怎么画** | 工具栏选"插入矩形"，拖拽 |
 | **Type 下拉** | 选 `Hazard` |
+
+| 属性 | 交互 | 说明 |
+|------|------|------|
+| `image` | 文件选择器 | 障碍物贴图（为空则用默认贴图） |
+| `trigger_condition` | 下拉 | 默认 `OnTouch`，碰到即触发 |
 
 棍子任意部分碰到障碍物 → 立即脱锚，进入失控飞行。可与墙壁重叠制造"危险平台"。
 
@@ -231,6 +239,8 @@
 选中矩形 → 右侧属性面板：
   Type 下拉              → 选 Wall
   wall_type 下拉         → 选 fragile
+  image_solid            → 点文件选择器，选 arts/wall/fragile_wall.png
+  image_ghost            → 点文件选择器，选虚线状态贴图（可选）
   勾选 fragile 复选框
   勾选 moving 复选框
   move_strategy 下拉     → 选 pingpong
