@@ -102,8 +102,8 @@
                  "type":"Item",
                  "visible":true,
                  "width":101,
-                 "x":488,
-                 "y":1720
+                 "x":265,
+                 "y":1505
                 }, 
                 {
                  "height":83,
@@ -142,8 +142,8 @@
                  "type":"Item",
                  "visible":true,
                  "width":83,
-                 "x":510,
-                 "y":1370
+                 "x":522,
+                 "y":1203
                 }, 
                 {
                  "height":64,
@@ -316,7 +316,7 @@
                          "y":0
                         }, 
                         {
-                         "x":160,
+                         "x":288,
                          "y":0
                         }],
                  "properties":[
@@ -325,12 +325,12 @@
                          "type":"string",
                          "value":"path_01"
                         }],
-                 "rotation":0,
+                 "rotation":13.7454493500607,
                  "type":"Path",
                  "visible":true,
                  "width":0,
-                 "x":149.151515151515,
-                 "y":1540.24242424242
+                 "x":153.275539118723,
+                 "y":1506.0267651245
                 }, 
                 {
                  "height":32,
@@ -495,7 +495,7 @@
                          "name":"move_strategy",
                          "propertytype":"MoveStrategy",
                          "type":"string",
-                         "value":"pingpong"
+                         "value":"once"
                         }, 
                         {
                          "name":"moving",
@@ -613,34 +613,6 @@
                  "y":389.242424242424
                 }, 
                 {
-                 "height":32,
-                 "id":160,
-                 "name":"wall_landing",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"image_solid",
-                         "type":"file",
-                         "value":"..\/..\/arts\/walls\/normal_wall.png"
-                        }, 
-                        {
-                         "name":"isSolid",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"wall_type",
-                         "type":"string",
-                         "value":"normal"
-                        }],
-                 "rotation":0,
-                 "type":"Wall",
-                 "visible":true,
-                 "width":160,
-                 "x":235.151515151515,
-                 "y":258.242424242424
-                }, 
-                {
                  "height":78,
                  "id":161,
                  "name":"wall_goal",
@@ -672,6 +644,126 @@
                  "width":152,
                  "x":240.151515151515,
                  "y":96.2424242424242
+                }, 
+                {
+                 "height":77,
+                 "id":164,
+                 "name":"item_length_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"LengthUp"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/length_up.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }, 
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":640
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":101,
+                 "x":283.5,
+                 "y":1641.5
+                }, 
+                {
+                 "height":77,
+                 "id":165,
+                 "name":"item_length_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"LengthUp"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/length_up.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }, 
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":640
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":101,
+                 "x":252.5,
+                 "y":1378.5
+                }, 
+                {
+                 "height":77,
+                 "id":166,
+                 "name":"item_length_up",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"LengthUp"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/length_up.png"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }, 
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":640
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":101,
+                 "x":261.5,
+                 "y":1238.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -802,7 +894,7 @@
                  "visible":true,
                  "width":0,
                  "x":304,
-                 "y":1850
+                 "y":1783
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -811,7 +903,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":162,
+ "nextobjectid":167,
  "orientation":"orthogonal",
  "properties":[
         {

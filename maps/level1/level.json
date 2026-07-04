@@ -11,7 +11,7 @@
   "music": "",
   "player_start": {
     "x": 304,
-    "y": 1850,
+    "y": 1783,
     "angle": 270.0,
     "anchor_side": "left",
     "stick_image": "",
@@ -42,8 +42,8 @@
       "type": "item",
       "prefab": "length_up",
       "effect": "LengthUp",
-      "x": 488,
-      "y": 1720,
+      "x": 265,
+      "y": 1505,
       "width": 101,
       "height": 77,
       "image": "../../arts/items/length_up.png",
@@ -56,8 +56,8 @@
       "type": "item",
       "prefab": "speed_up",
       "effect": "SpeedUp",
-      "x": 510,
-      "y": 1370,
+      "x": 522,
+      "y": 1203,
       "width": 83,
       "height": 83,
       "image": "../../arts/items/speed_up.png",
@@ -128,8 +128,8 @@
       "type": "item",
       "prefab": "length_up",
       "effect": "LengthUp",
-      "x": 144,
-      "y": 1545,
+      "x": 153,
+      "y": 1506,
       "width": 0,
       "height": 0,
       "image": "",
@@ -210,7 +210,7 @@
       "isSolid": true,
       "components": {
         "moving": {
-          "strategy": "pingpong",
+          "strategy": "once",
           "speed": 60.0,
           "start_delay": 0.0
         }
@@ -220,10 +220,10 @@
       "id": "wall_unstable",
       "type": "wall",
       "wall_type": "normal",
-      "x": 235,
-      "y": 878,
+      "x": 89,
+      "y": 896,
       "width": 160,
-      "height": 32,
+      "height": 237,
       "image_solid": "../../arts/walls/normal_wall.png",
       "image_ghost": "",
       "isSolid": true,
@@ -258,18 +258,6 @@
       }
     },
     {
-      "id": "wall_landing",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 235,
-      "y": 258,
-      "width": 160,
-      "height": 32,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
       "id": "wall_goal",
       "type": "wall",
       "wall_type": "goal",
@@ -283,6 +271,48 @@
       "components": {
         "goal": {}
       }
+    },
+    {
+      "id": "item_length_up",
+      "type": "item",
+      "prefab": "length_up",
+      "effect": "LengthUp",
+      "x": 283,
+      "y": 1641,
+      "width": 101,
+      "height": 77,
+      "image": "../../arts/items/length_up.png",
+      "value": 640.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_length_up",
+      "type": "item",
+      "prefab": "length_up",
+      "effect": "LengthUp",
+      "x": 252,
+      "y": 1378,
+      "width": 101,
+      "height": 77,
+      "image": "../../arts/items/length_up.png",
+      "value": 640.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_length_up",
+      "type": "item",
+      "prefab": "length_up",
+      "effect": "LengthUp",
+      "x": 261,
+      "y": 1238,
+      "width": 101,
+      "height": 77,
+      "image": "../../arts/items/length_up.png",
+      "value": 640.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
     },
     {
       "id": "platform_start",
