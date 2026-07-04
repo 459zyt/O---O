@@ -1217,13 +1217,13 @@ class Wall:
             self._draw_ghost_wall(screen, camera_y, images)
             return
 
-        # wall_type → image key
-        img_key = {
+        # wall_type → image key（设计师未自定义时使用默认贴图）
+        _default_imgs = {
             "normal": "normal_wall",
             "fragile": "fragile_wall",
             "goal": "goal_wall",
         }
-        img = images.get(img_key.get(self.wall_type, "normal_wall"))
+        img = images.get(_default_imgs.get(self.wall_type, "normal_wall"))
 
         # 世界坐标 → 屏幕坐标
         sx = int(self.x)

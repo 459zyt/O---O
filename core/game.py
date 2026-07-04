@@ -80,21 +80,31 @@ class Game:
         """加载音效和图片"""
         self.sound_mgr.load_all(SOUND_CONFIG)
 
-        self.image_mgr.load("endpoint", "arts/stick/endpoint.png")
-        self.image_mgr.load("rod", "arts/stick/rod.png")
+        # Stick
+        self.image_mgr.load("rod", "arts/stick/杆.png")
+        self.image_mgr.load("left_ball", "arts/stick/左球.png")
+        self.image_mgr.load("right_ball", "arts/stick/右球.png")
+        # Walls
         self.image_mgr.load("normal_wall", "arts/walls/normal_wall.png")
         self.image_mgr.load("fragile_wall", "arts/walls/fragile_wall.png")
         self.image_mgr.load("goal_wall", "arts/walls/goal_wall.png")
-        self.image_mgr.load("hazard", "arts/items/hazard.png")
-        self.image_mgr.load("length_up", "arts/items/length_up.png")
-        self.image_mgr.load("length_down", "arts/items/length_down.png")
-        self.image_mgr.load("speed_up", "arts/items/speed_up.png")
-        self.image_mgr.load("speed_down", "arts/items/speed_down.png")
-        self.image_mgr.load("key", "arts/items/key.png")
-        self.image_mgr.load("checkpoint", "arts/items/checkpoint.png")
-        self.image_mgr.load("lava", "arts/lava/lava.png")
-        self.image_mgr.load("menu_bg", "arts/backgrounds/menu_bg.png")
-        self.image_mgr.load("level_bg", "arts/backgrounds/level_01_bg.png")
+        self.image_mgr.load("solid_ghost", "arts/walls/solid_ghost.png")
+        self.image_mgr.load("solid_toggle", "arts/walls/solid_toggle.png")
+        self.image_mgr.load("danger_wall", "arts/walls/危险地块.png")
+        # Items
+        self.image_mgr.load("hazard", "arts/items/危险地块.png")
+        self.image_mgr.load("length_up", "arts/items/伸长.png")
+        self.image_mgr.load("length_down", "arts/items/缩短.png")
+        self.image_mgr.load("speed_up", "arts/items/加速.png")
+        self.image_mgr.load("speed_down", "arts/items/减速.png")
+        self.image_mgr.load("key", "arts/items/钥匙.png")
+        self.image_mgr.load("checkpoint_off", "arts/items/checkpoint未激活.png")
+        self.image_mgr.load("checkpoint_on", "arts/items/checkpoint已经激活.png")
+        # Lava & background
+        self.image_mgr.load("lava", "arts/lava/lava.gif")
+        self.image_mgr.load("menu_bg", "arts/backgrounds/背景.png")
+        self.image_mgr.load("level_bg", "arts/backgrounds/背景.png")
+        self.image_mgr.load("sky", "arts/backgrounds/sky.png")
 
     def _setup_event_bus(self):
         """连接事件总线：音效、粒子、UI 气泡响应游戏事件"""
@@ -447,7 +457,7 @@ class Game:
         now = pygame.time.get_ticks() / 1000.0
 
         if self.state == GameState.MENU:
-            self._draw_bg("menu_bg")
+            self._draw_menu_bg()
             rdr.draw_main_menu_ui(self.screen, self.fonts, self.menu_time, screen_w, screen_h)
             rdr.draw_menu_stick_animation(self.screen, self.menu_stick_angle, self.menu_time, screen_w)
 
@@ -475,17 +485,50 @@ class Game:
 
     def _draw_game_scene(self):
         """绘制游戏场景（背景、关卡、粒子、棍子）"""
-        self._draw_bg("level_bg")
+        self._draw_bg()
         camera_y = self.camera.y
         self.level.draw(self.screen, camera_y, self.image_mgr.images)
         self.particles.draw(self.screen, camera_y)
         self.stick.draw(self.screen, camera_y, self.image_mgr.images)
 
-    def _draw_bg(self, image_key):
-        """绘制背景"""
-        bg = self.image_mgr.get(image_key)
+    def _draw_menu_bg(self):
+        """菜单背景：用天空图片平铺"""
+        sky = self.image_mgr.get("sky")
+        if sky:
+            for y in range(0, SCREEN_HEIGHT, sky.get_height()):
+                for x in range(0, SCREEN_WIDTH, sky.get_width()):
+                    self.screen.blit(sky, (x, y))
+        else:
+            self.screen.fill(C_BG)
+
+    def _draw_bg(self):
+        """绘制背景：背景.png 从地图底部向上，超出部分用 sky.png 无限循环"""
+        bg = self.image_mgr.get("level_bg")
+        sky = self.image_mgr.get("sky")
+        screen_w, screen_h = SCREEN_WIDTH, SCREEN_HEIGHT
+
         if bg:
-            self.screen.blit(bg, (0, 0))
+            # 背景图底部对齐地图底部
+            map_bottom_y = self.level.height
+            bg_screen_y = map_bottom_y - self.camera.y
+            self.screen.blit(bg, (0, bg_screen_y - bg.get_height()))
+
+            # 背景图上方用天空填充
+            if sky:
+                sky_top = bg_screen_y - bg.get_height()
+                if sky_top > 0:
+                    y = sky_top - sky.get_height()
+                    while y < sky_top:
+                        self.screen.blit(sky, (0, int(y)))
+                        y += sky.get_height()
+            elif sky_top > 0:
+                self.screen.fill(C_BG, (0, 0, screen_w, int(sky_top)))
+        elif sky:
+            # 无背景图：全用天空平铺
+            y = - (self.camera.y % sky.get_height())
+            while y < screen_h:
+                self.screen.blit(sky, (0, int(y)))
+                y += sky.get_height()
         else:
             self.screen.fill(C_BG)
 

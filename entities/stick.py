@@ -387,7 +387,7 @@ class Stick:
 
     # ---- 渲染 ----
     def draw(self, screen, camera_y, images):
-        """绘制棍子"""
+        """绘制棍子 — 使用杆/左球/右球贴图"""
         e0, e1 = self.get_endpoints()
 
         sx0, sy0 = int(e0[0]), int(e0[1] - camera_y)
@@ -410,13 +410,15 @@ class Stick:
                         (anchor[0] - glow_radius * 2, anchor[1] - glow_radius * 2),
                         special_flags=pygame.BLEND_ALPHA_SDL2)
 
-        endpoint_img = images.get("endpoint")
+        left_ball = images.get("left_ball")
+        right_ball = images.get("right_ball")
         flash = self.flash_timer > 0
 
         for i, (sx, sy) in enumerate([(sx0, sy0), (sx1, sy1)]):
-            if endpoint_img:
+            ball_img = left_ball if i == 0 else right_ball
+            if ball_img:
                 r = self.endpoint_radius
-                scaled = pygame.transform.scale(endpoint_img, (r * 2 + 4, r * 2 + 4))
+                scaled = pygame.transform.scale(ball_img, (r * 2 + 4, r * 2 + 4))
                 screen.blit(scaled, (sx - r - 2, sy - r - 2))
             else:
                 color = self.flash_color if flash else C_STICK_ENDPOINT

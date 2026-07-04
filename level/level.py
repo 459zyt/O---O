@@ -309,21 +309,20 @@ class Level:
                                        min(rect.width, rect.height) // 2 - 2)
                 continue
 
-            # Checkpoint 存档点：平铺贴图 + 激活发光
+            # Checkpoint 存档点：未激活/已激活两套贴图
             if etype == "Checkpoint":
-                cp_img = images.get("checkpoint")
+                is_active = (item_obj and
+                    self.checkpoint_manager.active_checkpoint_id == item_obj.checkpoint_id)
+                cp_key = "checkpoint_on" if is_active else "checkpoint_off"
+                cp_img = images.get(cp_key)
                 if cp_img:
                     iw, ih = cp_img.get_width(), cp_img.get_height()
                     for tx in range(sx, sx + rect.width, iw):
                         for ty in range(sy, sy + rect.height, ih):
                             screen.blit(cp_img, (tx, ty))
                 else:
-                    pygame.draw.rect(screen, (100, 200, 255), (sx, sy, rect.width, rect.height), border_radius=4)
-                # 激活存档点发光
-                if item_obj and self.checkpoint_manager.active_checkpoint_id == item_obj.checkpoint_id:
-                    glow = pygame.Surface((rect.width + 8, rect.height + 8), pygame.SRCALPHA)
-                    glow.fill((100, 200, 255, 60))
-                    screen.blit(glow, (sx - 4, sy - 4))
+                    color = (100, 255, 100) if is_active else (100, 200, 255)
+                    pygame.draw.rect(screen, color, (sx, sy, rect.width, rect.height), border_radius=4)
                 continue
 
             img = item_images.get(etype)
