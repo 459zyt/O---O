@@ -348,7 +348,7 @@ def _convert_wall(obj, props, paths, warnings):
     if _to_bool(props.get("moving")):
         pid = props.get("path_id", "")
         mc = {
-            "strategy": props.get("move_strategy", "loop"),
+            "strategy": props.get("move_strategy", "pingpong"),
             "speed": _to_float(props.get("move_speed", 80)),
             "start_delay": _to_float(props.get("move_start_delay", 0)),
         }

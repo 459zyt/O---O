@@ -77,49 +77,17 @@ class MoveStrategy:
     ----
     path_points : list[list[float,float]]
         路径点列表，如 [[0,0], [100,0], [100,100]]
-        每个点会被转为 Vector2 存储。
     move_speed : float
         移动速度（像素/秒），默认 80。
     """
 
     def __init__(self, path_points, move_speed=80):
-        # self.path: 世界坐标下的路径点序列
         self.path = [Vector2(p) for p in path_points]
-        # self.move_speed: 沿路径移动的速率 (px/s)
         self.move_speed = move_speed
-        # self._elapsed: 累计时间，驱动匀速运动
         self._elapsed = 0.0
 
     def update(self, dt, wall):
-        """
-        每帧由 MovingComponent 调用。
-
-        参数
-        ----
-        dt : float
-            帧间隔时间（秒）
-        wall : Wall
-            所属墙壁对象，策略直接修改 wall.x / wall.y
-        """
         raise NotImplementedError
-
-
-class LoopMoveStrategy(MoveStrategy):
-    """
-    循环移动策略 — 沿路径点循环绕圈。
-
-    路径 A → B → C → A → B → C → ...
-    到达最后一个点后跳回第一个点，形成闭环。
-
-    示例::
-        LoopMoveStrategy([[0,0], [100,0], [100,100]], move_speed=80)
-        # 墙壁会在 (0,0)→(100,0)→(100,100)→(0,0)→... 之间循环移动
-    """
-
-    def __init__(self, path_points, move_speed=80):
-        super().__init__(path_points, move_speed)
-        # self._total: 完整一圈的总长度
-        self._total = self._calc_total(self.path, loop=True)
 
     @staticmethod
     def _calc_total(path, loop):
@@ -132,27 +100,10 @@ class LoopMoveStrategy(MoveStrategy):
                 total += (path[j] - path[i]).length()
         return max(total, 0.0001)
 
-    def update(self, dt, wall):
-        """
-        每帧移动: 累计时间 → 计算当前走过的距离开 → 沿路径插值位置。
-        使用取模 (%) 实现无限循环。
-        """
-        if len(self.path) < 2:
-            return  # 至少需要两个点才能移动
-        self._elapsed += dt
-        # 对总长取模 = 循环
-        dist = (self._elapsed * self.move_speed) % self._total
-        self._move_along(wall, dist, self.path, loop=True)
-
     @staticmethod
     def _move_along(wall, dist, path, loop):
         """
-        沿路径走到距离 dist 处（从起点算起）。
-
-        遍历路径的每一段，累积长度。当累积长度 >= dist 时，
-        在当前段上线性插值出墙壁位置，直接写入 wall.x / wall.y。
-
-        这是所有策略共用的底层插值方法。
+        沿路径走到距离 dist 处，写入 wall.x / wall.y。
         """
         accumulated = 0.0
         n = len(path)
@@ -162,7 +113,6 @@ class LoopMoveStrategy(MoveStrategy):
                 break
             seg_len = (path[j] - path[i]).length()
             if accumulated + seg_len >= dist:
-                # 在当前段上插值
                 t = (dist - accumulated) / max(seg_len, 0.0001)
                 wall.x = path[i].x + (path[j].x - path[i].x) * t
                 wall.y = path[i].y + (path[j].y - path[i].y) * t
@@ -190,47 +140,49 @@ class PingPongMoveStrategy(MoveStrategy):
             self._full_path = self.path + self.path[-2:0:-1]
         else:
             self._full_path = self.path[:]
-        self._total = LoopMoveStrategy._calc_total(self._full_path, loop=False)
+        self._total = MoveStrategy._calc_total(self._full_path, loop=False)
 
     def update(self, dt, wall):
         if len(self._full_path) < 2:
             return
         self._elapsed += dt
         dist = (self._elapsed * self.move_speed) % self._total
-        LoopMoveStrategy._move_along(wall, dist, self._full_path, loop=False)
+        MoveStrategy._move_along(wall, dist, self._full_path, loop=False)
 
 
 class OneShotMoveStrategy(MoveStrategy):
     """
-    单次移动策略 — 到达最后一个点后停止。
+    触发式单次移动 — 棍子抓住墙壁后才开始移动，到终点停止。
 
+    初始停在路径起点。trigger() 被调用后才开始沿路径移动一次。
     路径 A → B → C → 停止。
-    到达终点后 self.finished 变为 True，不再移动。
 
     示例::
         OneShotMoveStrategy([[320,560], [320,200]], move_speed=120)
-        # 墙壁从 (320,560) 移动到 (320,200) 后停止
+        # 墙壁停在 (320,560)，棍子抓住后移向 (320,200)
     """
 
     def __init__(self, path_points, move_speed=80):
         super().__init__(path_points, move_speed)
-        self.finished = False  # 是否已到达终点
+        self.triggered = False  # 是否已被触发
+        self.finished = False   # 是否已到达终点
+
+    def trigger(self):
+        """棍子抓住墙壁时调用，启动移动"""
+        self.triggered = True
 
     def update(self, dt, wall):
-        if self.finished or len(self.path) < 2:
+        if not self.triggered or self.finished or len(self.path) < 2:
             return
         self._elapsed += dt
-        # 总路径长度
-        total = sum((self.path[i + 1] - self.path[i]).length()
-                    for i in range(len(self.path) - 1))
+        total = MoveStrategy._calc_total(self.path, loop=False)
         max_dist = self.move_speed * self._elapsed
         if max_dist >= total:
-            # 到达终点: 钉在最后一个点
             wall.x = self.path[-1].x
             wall.y = self.path[-1].y
             self.finished = True
             return
-        LoopMoveStrategy._move_along(wall, max_dist, self.path, loop=False)
+        MoveStrategy._move_along(wall, max_dist, self.path, loop=False)
 
 
 # ================================================================
@@ -340,17 +292,14 @@ class MovingComponent(WallComponent):
     """
     移动组件 — 每帧按 MoveStrategy 更新墙壁位置。
 
-    持有: MoveStrategy 实例（Loop/PingPong/OneShot 之一）
+    持有: MoveStrategy 实例（PingPong 或 OneShot）
 
     update() 流程:
       if move_strategy exists and owner exists:
           move_strategy.update(dt, self.owner)
-          # 策略直接修改 wall.x / wall.y
 
-    参数
-    ----
-    move_strategy : MoveStrategy | None
-        移动策略，创建时传入或之后通过 set_strategy() 绑定。
+    棍子抓住时触发 OneShotMoveStrategy:
+      on_anchor_attached() → strategy.trigger()
     """
 
     def __init__(self, move_strategy=None):
@@ -360,6 +309,11 @@ class MovingComponent(WallComponent):
     def update(self, dt):
         if self.move_strategy is not None and self.owner is not None:
             self.move_strategy.update(dt, self.owner)
+
+    def on_anchor_attached(self, stick, world_pos):
+        """棍子抓住时触发 OneShot 策略"""
+        if hasattr(self.move_strategy, 'trigger'):
+            self.move_strategy.trigger()
 
 
 class UnstableComponent(WallComponent):
@@ -750,17 +704,15 @@ def create_component(name, cfg=None):
         return GoalComponent()
 
     if name == "moving":
-        strategy_type = cfg.get("strategy", "loop")
+        strategy_type = cfg.get("strategy", "pingpong")
         speed = cfg.get("speed", 80)
         path = cfg.get("path", [])
 
-        if strategy_type == "pingpong":
-            return MovingComponent(PingPongMoveStrategy(path, speed))
-        elif strategy_type == "once":
+        if strategy_type == "once":
             return MovingComponent(OneShotMoveStrategy(path, speed))
         else:
-            # 默认 "loop"
-            return MovingComponent(LoopMoveStrategy(path, speed))
+            # 默认 "pingpong"（循环移动）
+            return MovingComponent(PingPongMoveStrategy(path, speed))
 
     if name == "unstable":
         return UnstableComponent(cfg)

@@ -22,7 +22,7 @@
             "name": "MoveStrategy",
             "storageType": "string",
             "type": "enum",
-            "values": ["loop", "pingpong", "once"],
+            "values": ["pingpong", "once"],
             "valuesAsFlags": false
         },
         {
