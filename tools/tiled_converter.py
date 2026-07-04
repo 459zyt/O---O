@@ -39,7 +39,7 @@ class ConverterWarning:
 
     def report(self):
         for w in self.warnings:
-            print(f"  ⚠ {w}")
+            print(f"  [WARN] {w}")
         return len(self.warnings)
 
 
@@ -179,7 +179,7 @@ def convert_tiled_to_level(tiled_path, output_path=None, check_only=False):
 
     n_warnings = warnings.report()
     if n_warnings > 0:
-        print(f"  ⚠ 共 {n_warnings} 个警告")
+        print(f"  [WARN] {n_warnings} warnings total")
 
     if check_only:
         print(f"  校验完成: {os.path.basename(tiled_path)}")
