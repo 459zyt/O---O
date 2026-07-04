@@ -658,6 +658,30 @@ class KeyPairSolidComponent(WallComponent):
 
 
 # ================================================================
+#  贴图加载辅助
+# ================================================================
+
+def _try_load_image(path):
+    """
+    尝试从多个路径解析加载贴图。
+    Tiled 的 file 选择器可能存储相对于 map、project 或绝对路径。
+    """
+    import os as _os
+    candidates = [path]
+    # 也尝试相对于项目根目录
+    if not _os.path.isabs(path):
+        candidates.append(_os.path.join(_os.getcwd(), path))
+    for p in candidates:
+        try:
+            return pygame.image.load(p).convert_alpha()
+        except Exception:
+            continue
+    if path:
+        print(f"[Wall] 无法加载自定义贴图: {path}")
+    return None
+
+
+# ================================================================
 #  组件工厂
 # ================================================================
 
@@ -1240,12 +1264,10 @@ class Wall:
         custom_img = None
         if self.appearance_solid:
             custom_img = images.get(f"_custom_{self.id}_solid")
-            if custom_img is None and self.appearance_solid:
-                try:
-                    custom_img = pygame.image.load(self.appearance_solid).convert_alpha()
+            if custom_img is None:
+                custom_img = _try_load_image(self.appearance_solid)
+                if custom_img:
                     images[f"_custom_{self.id}_solid"] = custom_img
-                except Exception:
-                    pass
 
         draw_img = custom_img or img
         if draw_img:
@@ -1298,11 +1320,9 @@ class Wall:
             cache_key = f"_custom_{self.id}_ghost"
             ghost_img = images.get(cache_key)
             if ghost_img is None:
-                try:
-                    ghost_img = pygame.image.load(self.appearance_ghost).convert_alpha()
+                ghost_img = _try_load_image(self.appearance_ghost)
+                if ghost_img:
                     images[cache_key] = ghost_img
-                except Exception:
-                    pass
 
         if ghost_img:
             # 半透明平铺自定义贴图
