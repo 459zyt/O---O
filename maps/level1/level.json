@@ -1,17 +1,17 @@
 {
   "version": 2,
   "level_id": "level1",
-  "name": "First Oopz",
+  "name": "Prefab Test",
   "world": {
     "width": 640,
-    "height": 1120,
+    "height": 1920,
     "tile_size": 32
   },
   "background": "arts/backgrounds/level_01_bg.png",
   "music": "",
   "player_start": {
-    "x": 288,
-    "y": 1072,
+    "x": 304,
+    "y": 1850,
     "angle": 270.0,
     "anchor_side": "left",
     "stick_image": "",
@@ -22,20 +22,301 @@
   "lava": {
     "enabled": true,
     "gif": "",
-    "start_y": 1100.0,
+    "start_y": 1850.0,
     "rise_speed": 25.0,
     "alpha": 160
   },
   "objects": [
     {
-      "id": "wall_start",
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 458,
+      "y": 1579,
+      "width": 99,
+      "height": 111,
+      "image": "../../arts/walls/danger_wall.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "item_length_up",
+      "type": "item",
+      "prefab": "length_up",
+      "effect": "LengthUp",
+      "x": 304,
+      "y": 1700,
+      "width": 101,
+      "height": 77,
+      "image": "../../arts/items/length_up.png",
+      "value": 640.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_speed_up",
+      "type": "item",
+      "prefab": "speed_up",
+      "effect": "SpeedUp",
+      "x": 304,
+      "y": 1380,
+      "width": 83,
+      "height": 83,
+      "image": "../../arts/items/speed_up.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_checkpoint",
+      "type": "item",
+      "prefab": "checkpoint",
+      "effect": "Checkpoint",
+      "x": 288,
+      "y": 940,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/checkpoint.png",
+      "value": 20.0,
+      "trigger_condition": "OnTouch",
+      "consume_on_trigger": false,
+      "checkpoint_id": "cp_001"
+    },
+    {
+      "id": "item_speed_down",
+      "type": "item",
+      "prefab": "speed_down",
+      "effect": "SpeedDown",
+      "x": 304,
+      "y": 700,
+      "width": 82,
+      "height": 78,
+      "image": "../../arts/items/speed_down.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_length_down",
+      "type": "item",
+      "prefab": "length_down",
+      "effect": "LengthDown",
+      "x": 304,
+      "y": 620,
+      "width": 76,
+      "height": 60,
+      "image": "../../arts/items/length_down.png",
+      "value": 30.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 304,
+      "y": 500,
+      "width": 71,
+      "height": 80,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final"
+    },
+    {
+      "id": "path_01",
+      "type": "item",
+      "prefab": "length_up",
+      "effect": "LengthUp",
+      "x": 235,
+      "y": 1118,
+      "width": 0,
+      "height": 0,
+      "image": "",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "wall_normal",
       "type": "wall",
       "wall_type": "normal",
-      "x": 128,
-      "y": 1056,
-      "width": 352,
+      "x": 235,
+      "y": 1678,
+      "width": 160,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 235,
+      "y": 1518,
+      "width": 160,
+      "height": 32,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "wall_ghost",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 235,
+      "y": 1358,
+      "width": 160,
       "height": 32,
       "image_solid": "",
+      "image_ghost": "",
+      "isSolid": false
+    },
+    {
+      "id": "wall_beat_switch",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 235,
+      "y": 1238,
+      "width": 160,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "beat_solid_switch": {
+          "switchSecond": 2.0,
+          "initial_delay": 0.0,
+          "start_solid": true
+        }
+      }
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 235,
+      "y": 1118,
+      "width": 160,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 60.0,
+          "start_delay": 0.0
+        }
+      }
+    },
+    {
+      "id": "wall_unstable",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 235,
+      "y": 878,
+      "width": 160,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "unstable": {
+          "max_tilt_angle": 35.0,
+          "tilt_direction": "both",
+          "inertia": 120.0,
+          "torque_scale": 1.0,
+          "damping": 1.5,
+          "return_speed": 20.0,
+          "break_at_max_tilt": false
+        }
+      }
+    },
+    {
+      "id": "wall_keypair_goal",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 109,
+      "y": 389,
+      "width": 129,
+      "height": 168,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "wall_landing",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 235,
+      "y": 258,
+      "width": 160,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_goal",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 240,
+      "y": 96,
+      "width": 152,
+      "height": 78,
+      "image_solid": "../../arts/walls/goal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "goal": {}
+      }
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 144,
+      "y": 1800,
+      "width": 352,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 412,
+      "y": -64,
+      "width": 94,
+      "height": 1892,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 266,
+      "y": -115,
+      "width": 94,
+      "height": 1892,
+      "image_solid": "../../arts/walls/normal_wall.png",
       "image_ghost": "",
       "isSolid": true
     }
