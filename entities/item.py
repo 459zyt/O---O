@@ -19,6 +19,7 @@ class Item:
         self.height = config.get("height", config.get("size", TILE_SIZE))
 
         self.effect = config.get("effect", config.get("prefab", "length_up"))
+        self.prefab = config.get("prefab", "length_up")
         self.value = config.get("value", 0)
         self.trigger_condition = config.get("trigger_condition", "OnAnchor")
 
@@ -35,7 +36,6 @@ class Item:
 
         self.active = True
         self.appearance = config.get("appearance")
-        self.prefab = config.get("prefab", "length_up")
 
     @property
     def center(self):

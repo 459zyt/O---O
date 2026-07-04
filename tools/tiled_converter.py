@@ -83,6 +83,7 @@ def convert_tiled_to_level(tiled_path, output_path=None, check_only=False):
 
     if output_path is None:
         output_path = os.path.join(os.path.dirname(tiled_path), "level.json")
+    _write_to_disk = (output_path is not None)
 
     # ── 1. 地图属性 ──
     map_props = _props_to_dict(tiled.get("properties", []))
@@ -182,20 +183,20 @@ def convert_tiled_to_level(tiled_path, output_path=None, check_only=False):
         print(f"  [WARN] {n_warnings} warnings total")
 
     if check_only:
-        print(f"  校验完成: {os.path.basename(tiled_path)}")
+        print(f"  [CHECK] {os.path.basename(tiled_path)}")
         return level
 
     # ── 5. 输出 ──
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(level, f, indent=2, ensure_ascii=False)
-
-    walls = [o for o in level["objects"] if o["type"] == "wall"]
-    items = [o for o in level["objects"] if o["type"] == "item"]
-    hazards = [o for o in level["objects"] if o["type"] == "hazard"]
-    print(f"  转换完成: {os.path.basename(tiled_path)} → {os.path.basename(output_path)}")
-    print(f"  世界: {level['world']['width']}x{level['world']['height']} px")
-    print(f"  墙壁: {len(walls)}, 道具: {len(items)}, 障碍物: {len(hazards)}")
-    print(f"  出生点: ({level['player_start']['x']}, {level['player_start']['y']})")
+    if output_path is not None:
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(level, f, indent=2, ensure_ascii=False)
+        walls = [o for o in level["objects"] if o["type"] == "wall"]
+        items = [o for o in level["objects"] if o["type"] == "item"]
+        hazards = [o for o in level["objects"] if o["type"] == "hazard"]
+        print(f"  [OK] {os.path.basename(tiled_path)} -> {os.path.basename(output_path)}")
+        print(f"  world: {level['world']['width']}x{level['world']['height']} px")
+        print(f"  walls: {len(walls)}, items: {len(items)}, hazards: {len(hazards)}")
+        print(f"  spawn: ({level['player_start']['x']}, {level['player_start']['y']})")
     return level
 
 

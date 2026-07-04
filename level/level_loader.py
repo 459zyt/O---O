@@ -26,47 +26,36 @@ class LevelLoader:
 
     @staticmethod
     def load(level_id):
-        """加载指定关卡，同时生成 needs 文件。自动转换过期的 .tiled.json。"""
+        """加载指定关卡。直接读取 Tiled 的 level.tiled.json，内存中转换。"""
         folder = f"maps/{level_id}"
-
-        # 0. 自动转换：如果 level.tiled.json 比 level.json 新，自动运行转换器
         tiled_path = os.path.join(folder, "level.tiled.json")
-        json_path = os.path.join(folder, "level.json")
-        if os.path.exists(tiled_path):
-            if not os.path.exists(json_path) or (
-                os.path.getmtime(tiled_path) > os.path.getmtime(json_path)
-            ):
-                print(f"[LevelLoader] level.tiled.json 已更新，自动转换...")
-                try:
-                    from tools.tiled_converter import convert_tiled_to_level
-                    convert_tiled_to_level(tiled_path, json_path)
-                except Exception as e:
-                    print(f"[LevelLoader] 自动转换失败: {e}")
 
-        # 1. 优先尝试 level.json（Tiled 导出格式）
-        if os.path.exists(json_path):
-            level, meta = LevelLoader._load_from_json(json_path, level_id)
+        # 1. 主路径：Tiled 地图文件
+        if os.path.exists(tiled_path):
+            from tools.tiled_converter import convert_tiled_to_level
+            data = convert_tiled_to_level(tiled_path)  # 内存转换，不写盘
+            level = LevelLoader._build_from_data(data)
             return level
 
-        # 2. 回退到 map.txt + meta.json（ASCII 格式）
+        # 2. 回退：ASCII 文本地图
         map_path = os.path.join(folder, "map.txt")
         meta_path = os.path.join(folder, "meta.json")
         if os.path.exists(map_path):
             level, meta = LevelLoader._load_from_txt(map_path, meta_path, level_id)
             return level
 
-        raise FileNotFoundError(f"找不到关卡文件: {folder}/level.json 或 map.txt")
+        raise FileNotFoundError(
+            f"关卡文件不存在: {tiled_path}\n"
+            f"请在 Tiled 中创建地图并保存为 level.tiled.json"
+        )
 
     # ================================================================
-    #  level.json 加载（Tiled 对象格式）
+    #  从内存数据构建关卡（Tiled 转换后直接使用，无需落盘 level.json）
     # ================================================================
 
     @staticmethod
-    def _load_from_json(path, level_id):
-        """从 level.json 加载关卡，返回 (level, meta_dict)"""
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
+    def _build_from_data(data):
+        """从 converter 返回的 dict 直接构建 Level 对象"""
         world = data.get("world", {})
         tile_size = world.get("tile_size", TILE_SIZE)
         width = world.get("width", MAP_COLS * tile_size)
@@ -75,7 +64,6 @@ class LevelLoader:
         ps = data.get("player_start", {})
         player_start = (ps.get("x", 0), ps.get("y", 0))
 
-        # 用空 layout 初始化 Level，然后手动填充对象
         cols = max(1, width // tile_size)
         rows = max(1, height // tile_size)
         empty_layout = ["." * cols] * rows
@@ -102,13 +90,7 @@ class LevelLoader:
             elif obj_type == "hazard":
                 LevelLoader._add_hazard_from_json(level, obj)
 
-        # 构建 meta 信息供 needs 文件使用
-        meta = {
-            "level_id": data.get("level_id", level_id),
-            "name": data.get("name", level_id),
-        }
-
-        return level, meta
+        return level
 
     @staticmethod
     def _add_wall_from_json(level, obj):
