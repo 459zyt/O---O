@@ -271,7 +271,7 @@ class Level:
         return stick.get_lowest_y() >= self.lava_y - LAVA_CONFIG["kill_margin"]
 
     # ---- 渲染 ----
-    def draw(self, screen, camera_y, images):
+    def draw(self, screen, camera_y, images, image_mgr=None):
         """绘制关卡 — 墙壁委托 Wall.draw()"""
         for wall in self.walls:
             wall.draw(screen, camera_y, images, self.tile_size)
@@ -357,9 +357,9 @@ class Level:
                                    min(rect.width, rect.height) // 2 - 2)
 
         # 岩浆
-        self._draw_lava(screen, camera_y, images)
+        self._draw_lava(screen, camera_y, images, image_mgr)
 
-    def _draw_lava(self, screen, camera_y, images):
+    def _draw_lava(self, screen, camera_y, images, image_mgr=None):
         lava_y_screen = int(self.lava_y - camera_y)
         if lava_y_screen > SCREEN_HEIGHT + 50:
             return
@@ -368,7 +368,14 @@ class Level:
         if lava_height <= 0:
             return
 
-        lava_img = images.get("lava")
+        # 获取 GIF 动画当前帧（支持 lava.gif 循环播放）
+        lava_img = None
+        if image_mgr:
+            anim = image_mgr.get_animation("lava")
+            lava_img = anim.frames[anim._index] if anim else image_mgr.get("lava")
+        if not lava_img:
+            lava_img = images.get("lava")
+
         if lava_img:
             lw, lh = lava_img.get_width(), lava_img.get_height()
             for y in range(lava_top, SCREEN_HEIGHT, lh):

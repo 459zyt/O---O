@@ -1,33 +1,103 @@
 """
 systems/image_manager.py
-图片加载管理器
+图片加载管理器 — 支持 GIF 逐帧动画
 """
 
 import os
 import pygame
 
 
+class GifAnimation:
+    """GIF 动画 — 存储所有帧和帧间隔，按时间推进"""
+    def __init__(self, frames, durations):
+        self.frames = frames          # [pygame.Surface, ...]
+        self.durations = durations    # [ms, ...] per frame
+        self._elapsed = 0.0
+        self._index = 0
+
+    def update(self, dt):
+        """推进动画时间，返回当前帧"""
+        self._elapsed += dt
+        frame_ms = self.durations[self._index] / 1000.0
+        while self._elapsed >= frame_ms:
+            self._elapsed -= frame_ms
+            self._index = (self._index + 1) % len(self.frames)
+            frame_ms = self.durations[self._index] / 1000.0
+        return self.frames[self._index]
+
+    def get_width(self):
+        return self.frames[0].get_width() if self.frames else 1
+
+    def get_height(self):
+        return self.frames[0].get_height() if self.frames else 1
+
+
+def _load_gif(path):
+    """从 GIF 文件提取所有帧"""
+    try:
+        from PIL import Image
+        pil_img = Image.open(path)
+        frames = []
+        durations = []
+        for i in range(pil_img.n_frames):
+            pil_img.seek(i)
+            duration = pil_img.info.get('duration', 100)
+            # 转换 RGBA → pygame Surface
+            rgba = pil_img.convert('RGBA')
+            raw = rgba.tobytes('raw', 'RGBA')
+            surf = pygame.image.fromstring(raw, rgba.size, 'RGBA').convert_alpha()
+            frames.append(surf)
+            durations.append(max(duration, 20))  # 最小 20ms
+        return GifAnimation(frames, durations)
+    except Exception as e:
+        print(f"[ImageManager] GIF load failed: {path} — {e}")
+        return None
+
+
 class ImageManager:
-    """加载和管理图片素材"""
+    """加载和管理图片素材（支持 GIF 动画）"""
 
     def __init__(self):
         self.images = {}
+        self.animations = {}  # GIF 动画对象
 
     def load(self, name, path, scale=None):
-        """加载图片，不存在时创建占位"""
-        if os.path.exists(path):
-            try:
-                img = pygame.image.load(path).convert_alpha()
-                if scale:
-                    img = pygame.transform.scale(img, scale)
-                self.images[name] = img
-                return
-            except Exception:
-                pass
-        self.images[name] = None
+        """加载图片，.gif 自动提取帧"""
+        if not os.path.exists(path):
+            self.images[name] = None
+            return
+
+        if path.lower().endswith('.gif'):
+            anim = _load_gif(path)
+            if anim:
+                self.animations[name] = anim
+                self.images[name] = anim.frames[0]  # 首帧作为初始
+            else:
+                self.images[name] = None
+            return
+
+        try:
+            img = pygame.image.load(path).convert_alpha()
+            if scale:
+                img = pygame.transform.scale(img, scale)
+            self.images[name] = img
+        except Exception:
+            self.images[name] = None
 
     def get(self, name):
         return self.images.get(name)
 
+    def get_animation(self, name):
+        """获取 GIF 动画对象（用于 update + 获取当前帧）"""
+        return self.animations.get(name)
+
+    def get_frame(self, name):
+        """获取当前帧（静态图片直接返回，GIF 返回当前动画帧）"""
+        anim = self.animations.get(name)
+        if anim:
+            return anim.frames[anim._index]
+        return self.images.get(name)
+
     def clear(self):
         self.images.clear()
+        self.animations.clear()

@@ -401,6 +401,10 @@ class Game:
         self.particles.update(dt)
         self.bubbles.update(dt)
 
+        # 推进 GIF 动画（岩浆等）
+        for anim in self.image_mgr.animations.values():
+            anim.update(dt)
+
     def _handle_game_event(self, evt):
         """处理游戏中的事件 — switch_anchor 返回 (锚点结果, 道具结果或None)"""
         if evt != "space" or self.state != GameState.PLAYING:
@@ -487,7 +491,7 @@ class Game:
         """绘制游戏场景（背景、关卡、粒子、棍子）"""
         self._draw_bg()
         camera_y = self.camera.y
-        self.level.draw(self.screen, camera_y, self.image_mgr.images)
+        self.level.draw(self.screen, camera_y, self.image_mgr.images, self.image_mgr)
         self.particles.draw(self.screen, camera_y)
         self.stick.draw(self.screen, camera_y, self.image_mgr.images)
 
