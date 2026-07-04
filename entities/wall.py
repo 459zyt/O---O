@@ -311,8 +311,12 @@ class MovingComponent(WallComponent):
             self.move_strategy.update(dt, self.owner)
 
     def on_anchor_attached(self, stick, world_pos):
-        """棍子抓住时触发 OneShot 策略"""
+        """棍子抓住时触发 OneShot 策略 — 用墙壁当前位置作为路径起点"""
         if hasattr(self.move_strategy, 'trigger'):
+            # 将路径起点设为墙壁当前位置，避免墙壁跳到 path[0]
+            if hasattr(self.move_strategy, 'path') and self.owner is not None:
+                from physics.vector import Vector2
+                self.move_strategy.path[0] = Vector2(self.owner.x, self.owner.y)
             self.move_strategy.trigger()
 
 
