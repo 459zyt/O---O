@@ -243,7 +243,8 @@ BUBBLE_CONFIG = {
         "shake": False,
     },
     "lava_warning": {  # 岩浆接近
-        "texts": ["HOT!!", "LAVA!"],
+        "texts": ["WAVE!!"],
+        "color": (80, 180, 255),
         "color": "danger_red",
         "glow_color": "lava_orange",
         "lifetime": 0.6,
@@ -788,20 +789,11 @@ def draw_game_ui(screen, fonts, stick, level, camera_y, time_seconds,
         alpha=180
     )
 
-    # 岩浆接近警告 — 底部 "HOT!!" + 红色渐变边
+    # 岩浆接近警告 — 蓝色 "WAVE!!" 气泡
     stick_top = stick.get_highest_y()
     lava_dist = stick_top - level.lava_y
     if 0 < lava_dist < 250:
         intensity = max(0, (250 - lava_dist) / 250)
-        # 底部红色光晕
-        alpha = int(50 * intensity)
-        warning = pygame.Surface((screen_w, screen_h), pygame.SRCALPHA)
-        for y in range(screen_h - 50, screen_h):
-            edge_alpha = int(alpha * (y - (screen_h - 50)) / 50)
-            pygame.draw.line(warning, (255, 30, 10, edge_alpha), (0, y), (screen_w, y))
-        screen.blit(warning, (0, 0))
-
-        # 周期性 HOT!! 气泡（岩浆非常近时）
         if intensity > 0.6 and random.random() < 0.02:
             bubble_mgr.spawn(
                 "lava_warning",

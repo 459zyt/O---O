@@ -388,13 +388,4 @@ class Level:
                 screen.blit(scaled, (0, y))
                 y += new_h
 
-        # 岩浆顶部发光过渡
-        for i in range(15):
-            alpha = 150 - i * 10
-            if alpha <= 0:
-                break
-            edge_y = lava_top - i
-            if 0 <= edge_y < SCREEN_HEIGHT:
-                glow_surf = pygame.Surface((SCREEN_WIDTH, 1), pygame.SRCALPHA)
-                glow_surf.fill((255, 120, 30, alpha))
-                screen.blit(glow_surf, (0, edge_y))
+        # 岩浆动画本身就是判定区，不额外画红色引导线
