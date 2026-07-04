@@ -47,12 +47,16 @@ def _load_gif(path):
         for i in range(pil_img.n_frames):
             pil_img.seek(i)
             duration = pil_img.info.get('duration', 100)
-            # 转换 RGBA → pygame Surface
             rgba = pil_img.convert('RGBA')
             raw = rgba.tobytes('raw', 'RGBA')
-            surf = pygame.image.fromstring(raw, rgba.size, 'RGBA').convert_alpha()
+            surf = pygame.image.fromstring(raw, rgba.size, 'RGBA')
+            # convert_alpha 需要 display init，用 try 兜底
+            try:
+                surf = surf.convert_alpha()
+            except Exception:
+                pass
             frames.append(surf)
-            durations.append(max(duration, 20))  # 最小 20ms
+            durations.append(max(duration, 20))
         return GifAnimation(frames, durations)
     except Exception as e:
         print(f"[ImageManager] GIF load failed: {path} — {e}")

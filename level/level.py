@@ -372,25 +372,16 @@ class Level:
         lava_img = None
         if image_mgr:
             anim = image_mgr.get_animation("lava")
-            if anim:
-                lava_img = anim.current_frame
+            lava_img = anim.current_frame if anim else image_mgr.get("lava")
         if not lava_img:
             lava_img = images.get("lava")
 
         if lava_img:
-            # 缩放贴图宽度 = 屏幕宽度，保持宽高比
             lh = lava_img.get_height()
             scaled = pygame.transform.scale(lava_img, (SCREEN_WIDTH, lh))
             for y in range(lava_top, SCREEN_HEIGHT, lh):
                 screen.blit(scaled, (0, y))
-        else:
-            for y in range(lava_top, SCREEN_HEIGHT):
-                t = (y - lava_top) / max(1, lava_height)
-                r, g, b = int(180 + 75 * t), int(30 + 100 * t), int(5 + 30 * t)
-                pygame.draw.line(screen, (min(255, r), min(255, g), min(255, b)),
-                                 (0, y), (SCREEN_WIDTH, y))
-
-        if 0 < lava_top < SCREEN_HEIGHT:
+        # 兜底：纯色填充（删除了红色线条）
             for i in range(15):
                 alpha = 150 - i * 10
                 if alpha <= 0:

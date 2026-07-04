@@ -507,42 +507,29 @@ class Game:
             self.screen.fill(C_BG)
 
     def _draw_bg(self):
-        """绘制背景：背景.png 从地图底部向上，超出部分用 sky.png 无限循环"""
+        """绘制背景：先铺 sky.png 无限平铺，再叠 背景.png 从地图底部向上"""
         bg = self.image_mgr.get("level_bg")
         sky = self.image_mgr.get("sky")
         screen_w, screen_h = SCREEN_WIDTH, SCREEN_HEIGHT
 
-        if bg:
-            # 缩放背景图宽度 = 屏幕宽度，保持比例
-            bg_h = int(bg.get_height() * SCREEN_WIDTH / bg.get_width())
-            bg_scaled = pygame.transform.scale(bg, (SCREEN_WIDTH, bg_h))
-            # 背景图底部对齐地图底部
-            map_bottom_y = self.level.height
-            bg_screen_y = map_bottom_y - self.camera.y
-            self.screen.blit(bg_scaled, (0, bg_screen_y - bg_h))
-
-            # 背景图上方用天空填充（天空也缩放到屏幕宽度）
-            if sky:
-                sky_h = int(sky.get_height() * SCREEN_WIDTH / sky.get_width())
-                sky_scaled = pygame.transform.scale(sky, (SCREEN_WIDTH, sky_h))
-                sky_top = bg_screen_y - bg_h
-                if sky_top > 0:
-                    y = sky_top - sky_h
-                    while y < sky_top:
-                        self.screen.blit(sky_scaled, (0, int(y)))
-                        y += sky_h
-            elif sky_top > 0:
-                self.screen.fill(C_BG, (0, 0, screen_w, int(sky_top)))
-        elif sky:
-            # 无背景图：全用天空平铺
+        # 1. 先铺满天空（从屏幕顶到底），消除任何空白/重影
+        if sky:
             sky_h = int(sky.get_height() * SCREEN_WIDTH / sky.get_width())
             sky_scaled = pygame.transform.scale(sky, (SCREEN_WIDTH, sky_h))
+            # 用 camera.y 偏移实现向上无限循环
             y = - (self.camera.y % sky_h)
             while y < screen_h:
                 self.screen.blit(sky_scaled, (0, int(y)))
                 y += sky_h
         else:
             self.screen.fill(C_BG)
+
+        # 2. 背景图叠在天空上面，底部对齐地图底部
+        if bg:
+            bg_h = int(bg.get_height() * SCREEN_WIDTH / bg.get_width())
+            bg_scaled = pygame.transform.scale(bg, (SCREEN_WIDTH, bg_h))
+            bg_screen_y = self.level.height - self.camera.y
+            self.screen.blit(bg_scaled, (0, bg_screen_y - bg_h))
 
     # ---- 主循环 ----
     def run(self):
