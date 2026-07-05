@@ -194,7 +194,7 @@ class Game:
 
         self.stick = Stick(
             x=anchor_x, y=anchor_y,
-            angle=math.radians(270),
+            angle=math.radians(90),
             length=STICK_CONFIG["length"],
             angular_speed=math.radians(STICK_CONFIG["angular_speed"])
         )

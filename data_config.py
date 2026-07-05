@@ -51,7 +51,7 @@ STICK_CONFIG = {
     "right_endpoint_radius": 12,
     "rod_mass": 2.0,
     "rod_radius": 4,
-    "length": 120,  # 初始棍长（像素）
+    "length": 132,  # 初始棍长（像素）
     "angular_speed": 180,  # 度/秒
     "min_length": 70,
     "max_length": 220,
