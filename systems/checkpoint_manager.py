@@ -194,6 +194,7 @@ class CheckpointManager:
 
             w.active = wd["active"]
             w.wall_type = wd.get("wall_type", w.wall_type)
+            w.prefab = f"{w.wall_type}_wall"
             w.isSolid = wd.get("isSolid", True)
             w.solid_locked = wd.get("solid_locked", False)
             w.appearance_solid = wd.get("appearance_solid", "")
