@@ -72,6 +72,7 @@ class Game:
         self.screen_shake = 0.0
         self.result_timer = 0.0
         self.pending_events = []
+        self._menu_bgm_started = False
 
         # 加载素材
         self._load_assets()
@@ -83,6 +84,12 @@ class Game:
     def _load_assets(self):
         """加载音效和图片"""
         self.sound_mgr.load_all(SOUND_CONFIG)
+
+        # 额外音效
+        self.sound_mgr.load("fragile_grab", "arts/sounds/wall_attached/se_blockFall砖被抓住.wav")
+        self.sound_mgr.load("fragile_break", "arts/sounds/wall_attached/se_blockAutoBreak砖破坏.wav")
+        self.sound_mgr.load("hazard_touch", "arts/sounds/道具音效/碰到障碍.wav")
+        self.sound_mgr.load("checkpoint_on", "arts/sounds/道具音效/se_激活检查点.wav")
 
         # Stick
         self.image_mgr.load("rod", "arts/stick/杆.png")
@@ -116,6 +123,8 @@ class Game:
         event_bus.subscribe("anchor_miss", self._on_anchor_miss)
         event_bus.subscribe("goal_reached", self._on_goal_reached)
         event_bus.subscribe("hazard_triggered", self._on_hazard_triggered)
+        event_bus.subscribe("wall_break", self._on_wall_break)
+        event_bus.subscribe("checkpoint_activated", self._on_checkpoint)
         event_bus.subscribe("item_picked", self._on_item_picked)
 
     def _on_anchor_success(self, data):
@@ -134,7 +143,7 @@ class Game:
     def _on_anchor_fragile(self, data):
         pos = data.get("position", (self.stick.center_x, self.stick.center_y))
         self.particles.emit_sparks(pos[0], pos[1], 15, (180, 180, 200), 200, 0.4)
-        self.sound_mgr.play_random("anchor_attach", "arts/sounds/attach")
+        self.sound_mgr.play("fragile_grab")
         self._spawn_bubble_at_stick("fragile")
 
     def _on_anchor_miss(self, data):
@@ -161,8 +170,17 @@ class Game:
             15, (255, 60, 40), 250, 0.5
         )
         self.screen_shake = 0.2
-        self.sound_mgr.play("hazard")
+        self.sound_mgr.play("hazard_touch")
         self._spawn_bubble_at_stick("hazard")
+
+    def _on_wall_break(self, data):
+        self.sound_mgr.play("fragile_break")
+        pos = data.get("position", (0, 0))
+        self.particles.emit_debris(pos[0], pos[1], 15,
+                                    (150, 140, 120), 150, 0.5)
+
+    def _on_checkpoint(self, data):
+        self.sound_mgr.play("checkpoint_on")
 
     def _on_item_picked(self, data):
         etype = data.get("effect_type", "")
@@ -234,6 +252,8 @@ class Game:
         self._prev_stick_state = None
         self.state = GameState.PLAYING
 
+        self.sound_mgr.stop_bgm()
+        self.sound_mgr.play_bgm("arts/sounds/main_theme/celeste_mello.mp3", loop=False)
         self.sound_mgr.play("game_start")
 
     def _handle_death(self, cause="lava"):
@@ -491,6 +511,9 @@ class Game:
         now = pygame.time.get_ticks() / 1000.0
 
         if self.state == GameState.MENU:
+            if not self._menu_bgm_started:
+                self._menu_bgm_started = True
+                self.sound_mgr.play_bgm("arts/sounds/title_bgm/tide ambient.mp3", loop=True)
             self._draw_menu_bg()
             rdr.draw_main_menu_ui(self.screen, self.fonts, self.menu_time, screen_w, screen_h)
             rdr.draw_menu_stick_animation(self.screen, self.menu_stick_angle, self.menu_time, screen_w)

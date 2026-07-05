@@ -1,6 +1,6 @@
 """
 systems/sound_manager.py
-音效加载与播放管理器
+音效加载与播放管理器 + BGM 背景音乐
 """
 
 import os
@@ -9,7 +9,7 @@ import pygame
 
 
 class SoundManager:
-    """加载和管理音效"""
+    """加载和管理音效 + BGM"""
 
     def __init__(self):
         self.sounds = {}
@@ -41,14 +41,11 @@ class SoundManager:
     def play_random(self, name, folder):
         """
         从文件夹中随机选一个 wav 播放。首次调用时加载文件夹中所有 wav。
-        name: 缓存键（如 'anchor_attach'）
-        folder: 文件夹路径（如 'arts/sounds/attach'）
         """
         if not self.enabled:
             return
         cache_key = f"_random_{name}"
         if cache_key not in self.sounds:
-            # 首次：扫描文件夹加载所有 wav
             if os.path.isdir(folder):
                 pool = []
                 for f in sorted(os.listdir(folder)):
@@ -69,3 +66,22 @@ class SoundManager:
         """从配置字典批量加载"""
         for name, path in sound_config.items():
             self.load(name, path)
+
+    # ── BGM ──
+
+    def play_bgm(self, path, loop=False):
+        """播放背景音乐（MP3 等），loop=True 循环"""
+        if self.enabled and os.path.exists(path):
+            try:
+                pygame.mixer.music.load(path)
+                pygame.mixer.music.play(-1 if loop else 0)
+            except Exception:
+                pass
+
+    def stop_bgm(self):
+        """停止 BGM"""
+        if self.enabled:
+            try:
+                pygame.mixer.music.stop()
+            except Exception:
+                pass

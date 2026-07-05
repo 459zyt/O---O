@@ -147,9 +147,10 @@ class Level:
         钥匙:    KeyPair → trigger_key_pair()
         """
         if item.effect == "Checkpoint":
-            # 只有锚定在墙上时才能存档，空中碰到不记录
             if stick.state == "anchored":
                 self.checkpoint_manager.activate_checkpoint(self, stick, item)
+                from core.event_bus import event_bus
+                event_bus.emit("checkpoint_activated", {})
             return
 
         if item.effect == "KeyPair":

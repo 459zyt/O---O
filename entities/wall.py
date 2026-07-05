@@ -1027,8 +1027,12 @@ class Wall:
           - 外部调用: wall.break_wall()
         """
         if not self.active:
-            return  # 已经碎了，忽略
+            return
         self.active = False
+
+        # 事件：墙壁碎裂 → 音效 + 粒子
+        from core.event_bus import event_bus
+        event_bus.emit("wall_break", {"position": (self.x + self.width/2, self.y + self.height/2)})
 
         # 通知所有组件中抓着此墙的棍子强制脱锚
         for comp in self.components.values():
