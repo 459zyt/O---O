@@ -9,7 +9,7 @@ import pygame
 from data_config import (
     SCREEN_WIDTH, SCREEN_HEIGHT, FPS,
     STICK_CONFIG, PARTICLE_CONFIG, LAVA_CONFIG,
-    SOUND_CONFIG, ITEM_CONFIG, TILE_SIZE
+    SOUND_CONFIG, ITEM_CONFIG, TILE_SIZE, PARALLAX_RATIO
 )
 from core.game_state import GameState
 from core.input_manager import InputManager
@@ -520,14 +520,11 @@ class Game:
             self.screen.blit(scaled, (0, SCREEN_HEIGHT - wave_h))
 
     def _draw_bg(self):
-        """绘制背景：远景（sky+背景图）以 1/5 速度滚动，近景以全速滚动"""
+        """绘制背景：远景以 PARALLAX_RATIO:1 慢速滚动，近景全速"""
         bg = self.image_mgr.get("level_bg")
         sky = self.image_mgr.get("sky")
         screen_w, screen_h = SCREEN_WIDTH, SCREEN_HEIGHT
-
-        # 视差：远景滚动速度 = 近景的 1/5
-        ratio = 5.0
-        p_y = self.camera.y / ratio
+        p_y = self.camera.y / PARALLAX_RATIO
 
         # 1. 天空无限平铺（远景速度）
         if sky:
@@ -544,7 +541,7 @@ class Game:
         if bg:
             bg_h = int(bg.get_height() * SCREEN_WIDTH / bg.get_width())
             bg_scaled = pygame.transform.scale(bg, (SCREEN_WIDTH, bg_h))
-            bg_screen_y = self.level.height / ratio - p_y
+            bg_screen_y = self.level.height / PARALLAX_RATIO - p_y
             self.screen.blit(bg_scaled, (0, bg_screen_y - bg_h))
 
     # ---- 主循环 ----
