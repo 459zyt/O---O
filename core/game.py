@@ -39,7 +39,12 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("O---O  -  一键攀登")
         try:
-            pygame.display.set_icon(pygame.image.load("arts/icon/cover.png"))
+            icon = pygame.image.load("arts/icon/cover.png")
+            pygame.display.set_icon(icon)
+            import os
+            if os.name == "nt":
+                import ctypes
+                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("O---O.game")
         except Exception:
             pass
         self.clock = pygame.time.Clock()
