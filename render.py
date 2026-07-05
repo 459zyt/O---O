@@ -724,13 +724,21 @@ def draw_main_menu_ui(screen, fonts, time_seconds, screen_w, screen_h):
         text_color="pure_white"
     )
 
-    # 副标题
+    # 副标题 + 操作提示
     draw_text(
         screen,
         "ANCHOR CLIMBER",
         fonts.get("ui_small"),
-        (screen_w // 2, screen_h // 2 - 40),
+        (screen_w // 2, screen_h // 2 - 50),
         text_color="ice_cyan",
+        center=True
+    )
+    draw_text(
+        screen,
+        "SWITCH ANCHOR TO CLIMB",
+        fonts.get("ui_tiny"),
+        (screen_w // 2, screen_h // 2 - 20),
+        text_color="miss_gray",
         center=True
     )
 
@@ -743,14 +751,29 @@ def draw_main_menu_ui(screen, fonts, time_seconds, screen_w, screen_h):
     line_surf.fill((*c("ice_cyan"), alpha))
     screen.blit(line_surf, (cx - line_w // 2, line_y))
 
-    # PRESS SPACE — 柔和闪烁
+    # 操作提示 — 浮动动画
+    float_offset = int(math.sin(time_seconds * 2.5) * 6)
+    base_y = screen_h - 120
+
+    # SPACE — START / ANCHOR（霓虹脉冲）
+    draw_neon_text(
+        screen,
+        "SPACE  -  START",
+        fonts.get("title_medium"),
+        (screen_w // 2, base_y + float_offset),
+        time_seconds,
+        text_color="ice_cyan",
+        soft=True
+    )
+
+    # R — RETRY（柔和闪烁）
     draw_soft_blink_text(
         screen,
-        "PRESS SPACE",
-        fonts.get("ui_large"),
-        (screen_w // 2, screen_h - 80),
+        "R  -  RETRY",
+        fonts.get("ui_medium"),
+        (screen_w // 2, base_y + 40 + float_offset),
         time_seconds,
-        text_color="ice_cyan"
+        text_color="pure_white"
     )
 
     # 版本信息
