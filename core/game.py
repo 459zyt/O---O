@@ -38,6 +38,10 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("O---O  -  一键攀登")
+        try:
+            pygame.display.set_icon(pygame.image.load("arts/icon/cover.png"))
+        except Exception:
+            pass
         self.clock = pygame.time.Clock()
         self.running = True
         self.state = GameState.MENU
