@@ -1,0 +1,2554 @@
+{
+  "version": 2,
+  "level_id": "level1",
+  "name": "Prefab Test",
+  "world": {
+    "width": 768,
+    "height": 11520,
+    "tile_size": 32
+  },
+  "background": "arts/backgrounds/level_01_bg.png",
+  "music": "",
+  "player_start": {
+    "x": 320,
+    "y": 11168,
+    "angle": 270.0,
+    "anchor_side": "left",
+    "stick_image": "",
+    "left_ball_image": "",
+    "right_ball_image": "",
+    "ball_image": ""
+  },
+  "lava": {
+    "enabled": true,
+    "gif": "",
+    "start_y": 1850.0,
+    "rise_speed": 25.0,
+    "alpha": 160
+  },
+  "objects": [
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": -511,
+      "y": 4450,
+      "width": 96,
+      "height": 64,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": -575,
+      "y": 4066,
+      "width": 128,
+      "height": 96,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 1672,
+      "y": 3535,
+      "width": 96,
+      "height": 128,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 2662,
+      "y": 2896,
+      "width": 96,
+      "height": 96,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 2822,
+      "y": 2832,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 2438,
+      "y": 2832,
+      "width": 96,
+      "height": 96,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 2310,
+      "y": 2288,
+      "width": 96,
+      "height": 128,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 1704,
+      "y": 3471,
+      "width": 96,
+      "height": 64,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 2278,
+      "y": 2448,
+      "width": 32,
+      "height": 64,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "hazard_spikes",
+      "type": "hazard",
+      "x": 2534,
+      "y": 2768,
+      "width": 32,
+      "height": 32,
+      "image": "../../arts/items/hazard.png",
+      "trigger_condition": "OnTouch"
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 288,
+      "y": 10176,
+      "width": 96,
+      "height": 64,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 1436,
+      "y": 8296,
+      "width": 192,
+      "height": 64,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 1340,
+      "y": 8168,
+      "width": 192,
+      "height": 64,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "item_length_down",
+      "type": "item",
+      "prefab": "length_down",
+      "effect": "LengthDown",
+      "x": -558,
+      "y": 4927,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/length_down.png",
+      "value": 30.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_speed_up",
+      "type": "item",
+      "prefab": "speed_up",
+      "effect": "SpeedUp",
+      "x": 1384,
+      "y": 3407,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/speed_up.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_checkpoint",
+      "type": "item",
+      "prefab": "checkpoint",
+      "effect": "Checkpoint",
+      "x": -511,
+      "y": 4706,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/checkpoint.png",
+      "value": 20.0,
+      "trigger_condition": "OnTouch",
+      "consume_on_trigger": false,
+      "checkpoint_id": "cp_001"
+    },
+    {
+      "id": "item_speed_up",
+      "type": "item",
+      "prefab": "speed_up",
+      "effect": "SpeedUp",
+      "x": 2630,
+      "y": 2160,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/speed_up.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_speed_up",
+      "type": "item",
+      "prefab": "speed_up",
+      "effect": "SpeedUp",
+      "x": 1448,
+      "y": 1840,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/speed_up.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_speed_down",
+      "type": "item",
+      "prefab": "speed_down",
+      "effect": "SpeedDown",
+      "x": 1384,
+      "y": 880,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/speed_down.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_speed_down",
+      "type": "item",
+      "prefab": "speed_down",
+      "effect": "SpeedDown",
+      "x": 1384,
+      "y": 624,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/speed_down.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 320,
+      "y": 10304,
+      "width": 96,
+      "height": 64,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 320,
+      "y": 10048,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 544,
+      "y": 9312,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 576,
+      "y": 10976,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final2"
+    },
+    {
+      "id": "item_length_up",
+      "type": "item",
+      "prefab": "length_up",
+      "effect": "LengthUp",
+      "x": 640,
+      "y": 8160,
+      "width": 96,
+      "height": 160,
+      "image": "../../arts/items/length_up.png",
+      "value": 64.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 224,
+      "y": 7872,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final13"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 128,
+      "y": 7968,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final12"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 320,
+      "y": 7968,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final14"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 224,
+      "y": 8064,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final11"
+    },
+    {
+      "id": "item_checkpoint",
+      "type": "item",
+      "prefab": "checkpoint",
+      "effect": "Checkpoint",
+      "x": 192,
+      "y": 9184,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/checkpoint未激活.png",
+      "value": 20.0,
+      "trigger_condition": "OnTouch",
+      "consume_on_trigger": false,
+      "checkpoint_id": "cp_001"
+    },
+    {
+      "id": "item_speed_up",
+      "type": "item",
+      "prefab": "speed_up",
+      "effect": "SpeedUp",
+      "x": 192,
+      "y": 7040,
+      "width": 96,
+      "height": 128,
+      "image": "../../arts/items/speed_up.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_length_down",
+      "type": "item",
+      "prefab": "length_down",
+      "effect": "LengthDown",
+      "x": 416,
+      "y": 7296,
+      "width": 224,
+      "height": 96,
+      "image": "../../arts/items/length_down.png",
+      "value": 30.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 128,
+      "y": 5920,
+      "width": 96,
+      "height": 96,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 160,
+      "y": 6048,
+      "width": 96,
+      "height": 64,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "wall_fragile",
+      "type": "wall",
+      "wall_type": "fragile",
+      "x": 160,
+      "y": 5792,
+      "width": 96,
+      "height": 96,
+      "image_solid": "../../arts/walls/fragile_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "fragile": {
+          "break_on_detach": true
+        }
+      }
+    },
+    {
+      "id": "item_speed_down",
+      "type": "item",
+      "prefab": "speed_down",
+      "effect": "SpeedDown",
+      "x": 576,
+      "y": 5408,
+      "width": 96,
+      "height": 160,
+      "image": "../../arts/items/speed_down.png",
+      "value": 0.3,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "item_checkpoint",
+      "type": "item",
+      "prefab": "checkpoint",
+      "effect": "Checkpoint",
+      "x": 288,
+      "y": 7296,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/checkpoint未激活.png",
+      "value": 20.0,
+      "trigger_condition": "OnTouch",
+      "consume_on_trigger": false,
+      "checkpoint_id": "cp_002"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 384,
+      "y": 4000,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final23"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 512,
+      "y": 4512,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final22"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 128,
+      "y": 3168,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final24"
+    },
+    {
+      "id": "item_key",
+      "type": "item",
+      "prefab": "key",
+      "effect": "KeyPair",
+      "x": 128,
+      "y": 4256,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/key.png",
+      "value": 20.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true,
+      "key_pair_id": "key_final21"
+    },
+    {
+      "id": "item_checkpoint",
+      "type": "item",
+      "prefab": "checkpoint",
+      "effect": "Checkpoint",
+      "x": 608,
+      "y": 4896,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/checkpoint未激活.png",
+      "value": 20.0,
+      "trigger_condition": "OnTouch",
+      "consume_on_trigger": false,
+      "checkpoint_id": "cp_003"
+    },
+    {
+      "id": "item_checkpoint",
+      "type": "item",
+      "prefab": "checkpoint",
+      "effect": "Checkpoint",
+      "x": 512,
+      "y": 2624,
+      "width": 64,
+      "height": 64,
+      "image": "../../arts/items/checkpoint未激活.png",
+      "value": 20.0,
+      "trigger_condition": "OnTouch",
+      "consume_on_trigger": false,
+      "checkpoint_id": "cp_004"
+    },
+    {
+      "id": "item_length_up",
+      "type": "item",
+      "prefab": "length_up",
+      "effect": "LengthUp",
+      "x": 256,
+      "y": 2432,
+      "width": 128,
+      "height": 128,
+      "image": "../../arts/items/length_up.png",
+      "value": 64.0,
+      "trigger_condition": "OnAnchor",
+      "consume_on_trigger": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 10944,
+      "width": 352,
+      "height": 320,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 288,
+      "y": 11360,
+      "width": 192,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 224,
+      "y": 9824,
+      "width": 256,
+      "height": 192,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1472,
+      "y": 9824,
+      "width": 160,
+      "height": 384,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 895,
+      "y": 9448,
+      "width": 160,
+      "height": 256,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 9152,
+      "width": 224,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 991,
+      "y": 9160,
+      "width": 128,
+      "height": 256,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1536,
+      "y": 10144,
+      "width": 192,
+      "height": 384,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": -448,
+      "y": 7808,
+      "width": 224,
+      "height": 660,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1883,
+      "y": 8912,
+      "width": 160,
+      "height": 256,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1276,
+      "y": 8808,
+      "width": 352,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1212,
+      "y": 8648,
+      "width": 320,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1184,
+      "y": 7567,
+      "width": 192,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1404,
+      "y": 8424,
+      "width": 320,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1152,
+      "y": 7471,
+      "width": 128,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1344,
+      "y": 7439,
+      "width": 192,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1088,
+      "y": 7280,
+      "width": 320,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1120,
+      "y": 7151,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 956,
+      "y": 7432,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 916,
+      "y": 7062,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 416,
+      "y": 7296,
+      "width": 288,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 160,
+      "y": 6720,
+      "width": 160,
+      "height": 544,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1344,
+      "y": 7151,
+      "width": 256,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 6144,
+      "width": 128,
+      "height": 160,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 5632,
+      "width": 192,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1564,
+      "y": 8136,
+      "width": 96,
+      "height": 89,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 4768,
+      "width": 288,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 544,
+      "y": 4864,
+      "width": 192,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1182,
+      "y": 4929,
+      "width": 64,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 4768,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1118,
+      "y": 4993,
+      "width": 64,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 929,
+      "y": 4854,
+      "width": 64,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 4256,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1320,
+      "y": 3791,
+      "width": 256,
+      "height": 288,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1544,
+      "y": 3119,
+      "width": 160,
+      "height": 672,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1640,
+      "y": 3727,
+      "width": 128,
+      "height": 192,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1320,
+      "y": 3407,
+      "width": 160,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1160,
+      "y": 2959,
+      "width": 160,
+      "height": 320,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1224,
+      "y": 3279,
+      "width": 96,
+      "height": 320,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 2374,
+      "y": 2384,
+      "width": 160,
+      "height": 320,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 2534,
+      "y": 2256,
+      "width": 160,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 2694,
+      "y": 1872,
+      "width": 128,
+      "height": 448,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 2470,
+      "y": 1776,
+      "width": 224,
+      "height": 160,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 2694,
+      "y": 2544,
+      "width": 96,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 2342,
+      "y": 1264,
+      "width": 192,
+      "height": 512,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1416,
+      "y": 1808,
+      "width": 192,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1416,
+      "y": 1232,
+      "width": 256,
+      "height": 448,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1544,
+      "y": 976,
+      "width": 192,
+      "height": 256,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1256,
+      "y": 1584,
+      "width": 224,
+      "height": 288,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1352,
+      "y": 848,
+      "width": 192,
+      "height": 320,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1352,
+      "y": 400,
+      "width": 192,
+      "height": 384,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_goal",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 192,
+      "y": 0,
+      "width": 256,
+      "height": 192,
+      "image_solid": "../../arts/walls/goal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "goal": {}
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1246,
+      "y": 4897,
+      "width": 32,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 9694,
+      "width": 128,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 60.0,
+          "start_delay": 0.0,
+          "path": [
+            [
+              192.0,
+              9726.0
+            ],
+            [
+              512.0000000000002,
+              9723.52851515151
+            ],
+            [
+              193.26500000000004,
+              9723.52851515151
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 160,
+      "y": 9568,
+      "width": 128,
+      "height": 62,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 60.0,
+          "start_delay": 0.0,
+          "path": [
+            [
+              224.0,
+              9599.0
+            ],
+            [
+              416.9288999999998,
+              9600.36184848484
+            ],
+            [
+              224.19400000000002,
+              9600.36184848484
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 10560,
+      "width": 192,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 224,
+      "y": 10688,
+      "width": 224,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 10432,
+      "width": 160,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 448,
+      "y": 9472,
+      "width": 128,
+      "height": 62,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 60.0,
+          "start_delay": 0.0,
+          "path": [
+            [
+              512.0,
+              9503.0
+            ],
+            [
+              191.3333333333334,
+              9503.361848484845
+            ],
+            [
+              511.333333333333,
+              9503.361848484845
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 128,
+      "y": 9312,
+      "width": 128,
+      "height": 128,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 544,
+      "y": 9312,
+      "width": 128,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 8896,
+      "width": 96,
+      "height": 256,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 8832,
+      "width": 288,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 480,
+      "y": 8896,
+      "width": 64,
+      "height": 160,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_start",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 480,
+      "y": 10976,
+      "width": 224,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 256,
+      "y": 10784,
+      "width": 160,
+      "height": 128,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final2",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 480,
+      "y": 9056,
+      "width": 256,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 672,
+      "y": 8352,
+      "width": 64,
+      "height": 704,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 480,
+      "y": 8480,
+      "width": 192,
+      "height": 191,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 96,
+      "y": 8160,
+      "width": 64,
+      "height": 512,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 608,
+      "y": 8128,
+      "width": 160,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 160,
+      "y": 8480,
+      "width": 160,
+      "height": 192,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 96,
+      "y": 7808,
+      "width": 320,
+      "height": 352,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 512,
+      "y": 7808,
+      "width": 96,
+      "height": 96,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final11",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 512,
+      "y": 7680,
+      "width": 96,
+      "height": 96,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final12",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 512,
+      "y": 7552,
+      "width": 96,
+      "height": 96,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final13",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 512,
+      "y": 7424,
+      "width": 96,
+      "height": 96,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final14",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 7200,
+      "width": 128,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 448,
+      "y": 6016,
+      "width": 256,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 608,
+      "y": 6720,
+      "width": 96,
+      "height": 256,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 160,
+      "y": 6624,
+      "width": 256,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 480,
+      "y": 6912,
+      "width": 224,
+      "height": 192,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 640,
+      "y": 6432,
+      "width": 96,
+      "height": 256,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 608,
+      "y": 6112,
+      "width": 96,
+      "height": 288,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 6272,
+      "width": 256,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 64,
+      "y": 5600,
+      "width": 192,
+      "height": 160,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 90.0,
+          "start_delay": 0.0,
+          "path": [
+            [
+              160.0,
+              5680.0
+            ],
+            [
+              160.899391,
+              5248.011676121968
+            ],
+            [
+              160.899391,
+              5248.0564761219675
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 576,
+      "y": 5216,
+      "width": 96,
+      "height": 416,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 384,
+      "y": 4384,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final21",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 512,
+      "y": 4128,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final22",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 974,
+      "y": 3184,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final24",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 608,
+      "y": 3104,
+      "width": 96,
+      "height": 128,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final24",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 608,
+      "y": 4992,
+      "width": 96,
+      "height": 192,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 4640,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 4640,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 4512,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 4384,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 4384,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 4384,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 3872,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 4256,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 4512,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 4000,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_keypair",
+      "type": "wall",
+      "wall_type": "goal",
+      "x": 384,
+      "y": 3744,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/solid_toggle.png",
+      "image_ghost": "../../arts/walls/solid_ghost.png",
+      "isSolid": false,
+      "components": {
+        "key_pair_solid": {
+          "key_pair_id": "key_final23",
+          "key_pair_result": "solid"
+        }
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 3744,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 384,
+      "y": 4000,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 3744,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 3680,
+      "width": 64,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 3552,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 0,
+      "y": 3680,
+      "width": 64,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 3424,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 3424,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 3424,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 384,
+      "y": 3424,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 3072,
+      "width": 64,
+      "height": 160,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 3296,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 384,
+      "y": 3168,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 2720,
+      "width": 64,
+      "height": 288,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 480,
+      "y": 2592,
+      "width": 128,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 3168,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 3168,
+      "width": 64,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 384,
+      "y": 2432,
+      "width": 256,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 288,
+      "y": 2336,
+      "width": 64,
+      "height": 288,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 256,
+      "y": 2240,
+      "width": 352,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 608,
+      "y": 2048,
+      "width": 128,
+      "height": 288,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 672,
+      "y": 1824,
+      "width": 32,
+      "height": 224,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 416,
+      "y": 1824,
+      "width": 256,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 416,
+      "y": 1696,
+      "width": 32,
+      "height": 128,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 128,
+      "y": 1664,
+      "width": 320,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 160,
+      "y": 1696,
+      "width": 32,
+      "height": 160,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 32,
+      "y": 1856,
+      "width": 160,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 32,
+      "y": 1408,
+      "width": 32,
+      "height": 448,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 32,
+      "y": 1376,
+      "width": 352,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 384,
+      "y": 1376,
+      "width": 32,
+      "height": 160,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 416,
+      "y": 1504,
+      "width": 224,
+      "height": 32,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 608,
+      "y": 1216,
+      "width": 32,
+      "height": 288,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 480,
+      "y": 672,
+      "width": 128,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 90.0,
+          "start_delay": 0.0,
+          "path": [
+            [
+              544.0,
+              720.0
+            ],
+            [
+              192.25332977688143,
+              1023.100609
+            ],
+            [
+              193.22532979688145,
+              1023.100609
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 512,
+      "y": 800,
+      "width": 64,
+      "height": 448,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 96,
+      "y": 640,
+      "width": 64,
+      "height": 448,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 64,
+      "y": 512,
+      "width": 128,
+      "height": 96,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 90.0,
+          "start_delay": 0.0,
+          "path": [
+            [
+              128.0,
+              560.0
+            ],
+            [
+              495.8999404921021,
+              351.99100609
+            ],
+            [
+              496.390004130768,
+              351.99100609
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "platform_wall",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 288,
+      "y": 224,
+      "width": 256,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true
+    },
+    {
+      "id": "wall_moving",
+      "type": "wall",
+      "wall_type": "normal",
+      "x": 1760,
+      "y": 6254,
+      "width": 576,
+      "height": 64,
+      "image_solid": "../../arts/walls/normal_wall.png",
+      "image_ghost": "",
+      "isSolid": true,
+      "components": {
+        "moving": {
+          "strategy": "pingpong",
+          "speed": 90.0,
+          "start_delay": 0.0,
+          "path": [
+            [
+              2048.0,
+              6286.0
+            ],
+            [
+              1762.899391,
+              5940.4776
+            ],
+            [
+              1762.899391,
+              6260.772
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}
