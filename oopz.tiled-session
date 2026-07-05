@@ -8,10 +8,40 @@
         "maps"
     ],
     "fileStates": {
+        "maps/_template/level.tiled.json": {
+            "scale": 0.6836607142857143,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 220.86979234687215,
+                "y": 559.4880501501893
+            }
+        },
+        "maps/level1/level.tiled.json": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.75,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 360,
+                "y": 10858
+            }
+        },
+        "maps/level_test/level.tiled.json": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 248,
+                "y": 1578.5
+            }
+        }
     },
     "openFiles": [
     ],
     "project": "oopz.tiled-project",
     "recentFiles": [
+        "maps/level_test/level.tiled.json",
+        "maps/_template/level.tiled.json",
+        "maps/level1/level.tiled.json"
     ]
 }
