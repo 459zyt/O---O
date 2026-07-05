@@ -22,9 +22,11 @@ class SoundManager:
 
     def load(self, name, path):
         """加载单个音效"""
-        if self.enabled and os.path.exists(path):
+        from data_config import get_path
+        full = get_path(path)
+        if self.enabled and os.path.exists(full):
             try:
-                self.sounds[name] = pygame.mixer.Sound(path)
+                self.sounds[name] = pygame.mixer.Sound(full)
             except Exception:
                 self.sounds[name] = None
         else:
@@ -46,11 +48,13 @@ class SoundManager:
             return
         cache_key = f"_random_{name}"
         if cache_key not in self.sounds:
-            if os.path.isdir(folder):
+            from data_config import get_path
+            resolved = get_path(folder)
+            if os.path.isdir(resolved):
                 pool = []
-                for f in sorted(os.listdir(folder)):
+                for f in sorted(os.listdir(resolved)):
                     if f.lower().endswith('.wav'):
-                        fp = os.path.join(folder, f)
+                        fp = os.path.join(resolved, f)
                         try:
                             pool.append(pygame.mixer.Sound(fp))
                         except Exception:
@@ -71,9 +75,11 @@ class SoundManager:
 
     def play_bgm(self, path, loop=False):
         """播放背景音乐（MP3 等），loop=True 循环"""
-        if self.enabled and os.path.exists(path):
+        from data_config import get_path
+        full = get_path(path)
+        if self.enabled and os.path.exists(full):
             try:
-                pygame.mixer.music.load(path)
+                pygame.mixer.music.load(full)
                 pygame.mixer.music.play(-1 if loop else 0)
             except Exception:
                 pass

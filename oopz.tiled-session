@@ -1,13 +1,13 @@
 {
-    "activeFile": "maps/level1/level.tiled.json",
+    "activeFile": "maps/level_test/level.tiled.json",
     "expandedProjectPaths": [
+        "maps/level_test",
+        "tiled/templates",
         "arts",
+        "maps/level1",
         "maps",
         "arts/needs",
-        "tiled/templates",
-        "maps/_template",
-        "maps/level_test",
-        "maps/level1"
+        "maps/_template"
     ],
     "fileStates": {
         "maps/_template/level.tiled.json": {
@@ -30,16 +30,17 @@
             }
         },
         "maps/level_test/level.tiled.json": {
-            "scale": 1,
-            "selectedLayer": 0,
+            "scale": 0.75,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 248,
-                "y": 1578.5
+                "x": 445.3333333333333,
+                "y": 1427.3333333333333
             }
         }
     },
     "openFiles": [
-        "maps/level1/level.tiled.json"
+        "maps/level1/level.tiled.json",
+        "maps/level_test/level.tiled.json"
     ],
     "project": "oopz.tiled-project",
     "recentFiles": [

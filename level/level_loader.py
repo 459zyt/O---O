@@ -27,8 +27,9 @@ class LevelLoader:
     @staticmethod
     def load(level_id):
         """加载指定关卡。直接读取 Tiled 的 level.tiled.json，内存中转换。"""
+        from data_config import get_path
         folder = f"maps/{level_id}"
-        tiled_path = os.path.join(folder, "level.tiled.json")
+        tiled_path = get_path(os.path.join(folder, "level.tiled.json"))
 
         # 1. 主路径：Tiled 地图文件
         if os.path.exists(tiled_path):

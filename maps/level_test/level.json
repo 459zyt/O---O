@@ -30,8 +30,8 @@
     {
       "id": "hazard_spikes",
       "type": "hazard",
-      "x": 481,
-      "y": 1582,
+      "x": 611,
+      "y": 1555,
       "width": 99,
       "height": 111,
       "image": "../../arts/walls/danger_wall.png",
@@ -128,12 +128,23 @@
       "type": "wall",
       "wall_type": "normal",
       "x": 450,
-      "y": 1507,
+      "y": 1717,
       "width": 160,
       "height": 32,
       "image_solid": "../../arts/walls/normal_wall.png",
       "image_ghost": "",
-      "isSolid": true
+      "isSolid": true,
+      "components": {
+        "unstable": {
+          "max_tilt_angle": 35.0,
+          "tilt_direction": "both",
+          "inertia": 1.0,
+          "torque_scale": 100.0,
+          "damping": 0.001,
+          "return_speed": 20.0,
+          "break_at_max_tilt": false
+        }
+      }
     },
     {
       "id": "wall_fragile",
@@ -205,11 +216,11 @@
               1527.0
             ],
             [
-              -34.69443439436211,
+              -9.694434394362094,
               1062.228306376792
             ],
             [
-              -31.828415815723034,
+              -6.828415815723016,
               1062.1770123738258
             ]
           ]
@@ -330,13 +341,24 @@
       "id": "platform_start",
       "type": "wall",
       "wall_type": "normal",
-      "x": 412,
-      "y": -64,
+      "x": 730,
+      "y": 44,
       "width": 94,
       "height": 1892,
       "image_solid": "../../arts/walls/normal_wall.png",
       "image_ghost": "",
-      "isSolid": true
+      "isSolid": true,
+      "components": {
+        "unstable": {
+          "max_tilt_angle": 35.0,
+          "tilt_direction": "both",
+          "inertia": 120.0,
+          "torque_scale": 1.0,
+          "damping": 4.5,
+          "return_speed": 20.0,
+          "break_at_max_tilt": false
+        }
+      }
     },
     {
       "id": "platform_start",

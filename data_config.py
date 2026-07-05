@@ -5,6 +5,18 @@ O---O 游戏统一配置文件
 """
 
 import math
+import os
+import sys
+
+
+def get_path(relative_path):
+    """解析资源路径：兼容 PyInstaller 打包和开发环境"""
+    if getattr(sys, 'frozen', False):
+        base = sys._MEIPASS
+    else:
+        base = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base, relative_path)
+
 
 # =========================
 # 屏幕配置

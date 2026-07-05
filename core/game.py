@@ -39,7 +39,8 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("O---O  -  一键攀登")
         try:
-            icon = pygame.image.load("arts/icon/cover.png")
+            from data_config import get_path
+            icon = pygame.image.load(get_path("arts/icon/cover.png"))
             pygame.display.set_icon(icon)
             import os
             if os.name == "nt":

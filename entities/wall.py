@@ -632,7 +632,8 @@ def _try_load_image(path):
     if not filename:
         return None
 
-    arts_dir = _os.path.join(_os.getcwd(), "arts")
+    from data_config import get_path
+    arts_dir = get_path("arts")
 
     def _search_and_load(target_name):
         if not _os.path.isdir(arts_dir):

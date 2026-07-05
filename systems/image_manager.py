@@ -63,14 +63,16 @@ class ImageManager:
 
     def load(self, name, path, scale=None):
         """加载图片。找不到文件或加载失败直接报错。"""
-        if not os.path.exists(path):
-            raise FileNotFoundError(f"[ImageManager] 素材不存在: {path}")
+        from data_config import get_path
+        full = get_path(path)
+        if not os.path.exists(full):
+            raise FileNotFoundError(f"[ImageManager] 素材不存在: {full}")
         if path.lower().endswith('.gif'):
-            anim = _load_gif(path)
+            anim = _load_gif(full)
             self.animations[name] = anim
             self.images[name] = anim.frames[0]
             return
-        img = pygame.image.load(path).convert_alpha()
+        img = pygame.image.load(full).convert_alpha()
         if scale:
             img = pygame.transform.scale(img, scale)
         self.images[name] = img
