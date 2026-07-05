@@ -14,6 +14,7 @@ class InputManager:
         pygame.K_ESCAPE: "quit",
         pygame.K_F3: "toggle_debug",
         pygame.K_r: "restart",
+        pygame.K_p: "test_level",
     }
 
     def poll(self):
