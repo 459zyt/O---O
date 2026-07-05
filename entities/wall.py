@@ -724,16 +724,7 @@ def create_component(name, cfg=None):
     if name == "moving":
         strategy_type = cfg.get("strategy", "pingpong")
         speed = cfg.get("speed", 80)
-        raw_path = cfg.get("path", [])
-
-        # 相对偏移 → 绝对坐标：path[0] 是起点，后续是 Δx,Δy
-        abs_path = []
-        if raw_path:
-            abs_path.append(raw_path[0][:])  # 起点（绝对坐标）
-            for i in range(1, len(raw_path)):
-                prev = abs_path[-1]
-                abs_path.append([prev[0] + raw_path[i][0],
-                                 prev[1] + raw_path[i][1]])
+        abs_path = cfg.get("path", [])  # path[0]=墙壁中心, path[1..n]=绝对目标位置
 
         if strategy_type == "once":
             return MovingComponent(OneShotMoveStrategy(abs_path, speed))

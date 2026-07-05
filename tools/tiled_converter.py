@@ -372,12 +372,9 @@ def _convert_wall(obj, props, paths, warnings):
             # path[0] = 墙壁中心（自动），后续点为相对上一个点的偏移量
             wall_cx = w["x"] + w["width"] / 2
             wall_cy = w["y"] + w["height"] / 2
-            rel_path = [[wall_cx, wall_cy]]
-            prev = [wall_cx, wall_cy]
-            for pt in paths[pid]:
-                rel_path.append([pt[0] - prev[0], pt[1] - prev[1]])
-                prev = pt
-            mc["path"] = rel_path
+            # path[0]=墙壁中心（设计师不用画），后续点=绝对目标位置
+            abs_path = [[wall_cx, wall_cy]] + [[p[0], p[1]] for p in paths[pid]]
+            mc["path"] = abs_path
         elif pid:
             warnings.add("E03", f"Walls 层 {w['id']}: path_id={pid} 未找到对应 Path 对象")
         components["moving"] = mc
