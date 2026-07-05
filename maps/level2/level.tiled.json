@@ -18,7 +18,88 @@
          "draworder":"topdown",
          "id":5,
          "name":"Paths",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":328,
+                 "name":"path_01",
+                 "opacity":1,
+                 "polyline":[
+                        {
+                         "x":83.0711239341278,
+                         "y":-258.877
+                        }, 
+                        {
+                         "x":401.806123934128,
+                         "y":-258.877
+                        }],
+                 "properties":[
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_01"
+                        }],
+                 "rotation":180,
+                 "type":"Path",
+                 "visible":true,
+                 "width":0,
+                 "x":563.071123934128,
+                 "y":9597.5
+                }, 
+                {
+                 "height":0,
+                 "id":330,
+                 "name":"path_02",
+                 "opacity":1,
+                 "polyline":[
+                        {
+                         "x":50.2320271529412,
+                         "y":-156.539596722229
+                        }, 
+                        {
+                         "x":242.966927152941,
+                         "y":-156.539596722229
+                        }],
+                 "properties":[
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_02"
+                        }],
+                 "rotation":180,
+                 "type":"Path",
+                 "visible":true,
+                 "width":0,
+                 "x":435.160927152941,
+                 "y":9571.33740327777
+                }, 
+                {
+                 "height":0,
+                 "id":331,
+                 "name":"path_03",
+                 "opacity":1,
+                 "polyline":[
+                        {
+                         "x":83.4008199290384,
+                         "y":-89.9390644303464
+                        }, 
+                        {
+                         "x":403.400819929038,
+                         "y":-89.9390644303464
+                        }],
+                 "properties":[
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_03"
+                        }],
+                 "rotation":0,
+                 "type":"Path",
+                 "visible":true,
+                 "width":0,
+                 "x":76.5991800709616,
+                 "y":9722.81606443035
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -390,9 +471,9 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":224,
-                 "x":224,
-                 "y":8640
+                 "width":96,
+                 "x":256,
+                 "y":10304
                 }, 
                 {
                  "height":64,
@@ -440,8 +521,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":192,
-                 "x":288,
-                 "y":8384
+                 "x":1436,
+                 "y":8296
                 }, 
                 {
                  "height":64,
@@ -489,8 +570,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":192,
-                 "x":192,
-                 "y":8256
+                 "x":1340,
+                 "y":8168
                 }, 
                 {
                  "height":128,
@@ -851,6 +932,144 @@
                  "width":128,
                  "x":256,
                  "y":320
+                }, 
+                {
+                 "height":64,
+                 "id":316,
+                 "name":"wall_fragile",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"fragile",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/fragile_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"max_tilt_angle",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"move_speed",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"move_strategy",
+                         "propertytype":"MoveStrategy",
+                         "type":"string",
+                         "value":"once"
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"fragile"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":96,
+                 "x":288,
+                 "y":10432
+                }, 
+                {
+                 "height":64,
+                 "id":317,
+                 "name":"wall_fragile",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"fragile",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/fragile_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"max_tilt_angle",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"move_speed",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"move_strategy",
+                         "propertytype":"MoveStrategy",
+                         "type":"string",
+                         "value":"once"
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"fragile"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":64,
+                 "x":288,
+                 "y":10176
+                }, 
+                {
+                 "height":64,
+                 "id":337,
+                 "name":"item_key",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"consume_on_trigger",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"effect",
+                         "propertytype":"ItemEffect",
+                         "type":"string",
+                         "value":"KeyPair"
+                        }, 
+                        {
+                         "name":"image",
+                         "type":"file",
+                         "value":"..\/..\/arts\/items\/key.png"
+                        }, 
+                        {
+                         "name":"key_pair_id",
+                         "type":"string",
+                         "value":"key_final"
+                        }, 
+                        {
+                         "name":"trigger_condition",
+                         "propertytype":"TriggerCondition",
+                         "type":"string",
+                         "value":"OnAnchor"
+                        }],
+                 "rotation":0,
+                 "type":"Item",
+                 "visible":true,
+                 "width":64,
+                 "x":544,
+                 "y":9472
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -864,7 +1083,7 @@
          "name":"Walls",
          "objects":[
                 {
-                 "height":384,
+                 "height":320,
                  "id":183,
                  "name":"platform_start",
                  "opacity":1,
@@ -887,7 +1106,7 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":512,
+                 "width":352,
                  "x":128,
                  "y":10944
                 }, 
@@ -920,7 +1139,7 @@
                  "y":11360
                 }, 
                 {
-                 "height":448,
+                 "height":192,
                  "id":185,
                  "name":"platform_start",
                  "opacity":1,
@@ -943,9 +1162,9 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":288,
-                 "x":320,
-                 "y":10496
+                 "width":256,
+                 "x":192,
+                 "y":9952
                 }, 
                 {
                  "height":384,
@@ -972,7 +1191,7 @@
                  "type":"Wall",
                  "visible":true,
                  "width":160,
-                 "x":384,
+                 "x":1472,
                  "y":9824
                 }, 
                 {
@@ -1000,11 +1219,11 @@
                  "type":"Wall",
                  "visible":true,
                  "width":160,
-                 "x":192,
-                 "y":9664
+                 "x":895.030303030303,
+                 "y":9448.84848484849
                 }, 
                 {
-                 "height":256,
+                 "height":124,
                  "id":189,
                  "name":"platform_wall",
                  "opacity":1,
@@ -1027,9 +1246,9 @@
                  "rotation":0,
                  "type":"Wall",
                  "visible":true,
-                 "width":160,
-                 "x":352,
-                 "y":9472
+                 "width":224,
+                 "x":96,
+                 "y":9280
                 }, 
                 {
                  "height":256,
@@ -1056,8 +1275,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":128,
-                 "x":288,
-                 "y":9376
+                 "x":991.030303030303,
+                 "y":9160.84848484849
                 }, 
                 {
                  "height":384,
@@ -1084,11 +1303,11 @@
                  "type":"Wall",
                  "visible":true,
                  "width":192,
-                 "x":448,
+                 "x":1536,
                  "y":10144
                 }, 
                 {
-                 "height":256,
+                 "height":660,
                  "id":216,
                  "name":"platform_wall",
                  "opacity":1,
@@ -1112,8 +1331,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":224,
-                 "x":192,
-                 "y":9056
+                 "x":23.0303030303029,
+                 "y":8240.84848484849
                 }, 
                 {
                  "height":256,
@@ -1140,8 +1359,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":160,
-                 "x":32,
-                 "y":9216
+                 "x":1883.0303030303,
+                 "y":8912.84848484849
                 }, 
                 {
                  "height":96,
@@ -1168,8 +1387,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":352,
-                 "x":128,
-                 "y":8896
+                 "x":1276,
+                 "y":8808
                 }, 
                 {
                  "height":96,
@@ -1196,8 +1415,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":320,
-                 "x":64,
-                 "y":8736
+                 "x":1212,
+                 "y":8648
                 }, 
                 {
                  "height":64,
@@ -1252,8 +1471,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":320,
-                 "x":256,
-                 "y":8512
+                 "x":1404,
+                 "y":8424
                 }, 
                 {
                  "height":64,
@@ -1953,8 +2172,8 @@
                  "type":"Wall",
                  "visible":true,
                  "width":96,
-                 "x":416,
-                 "y":8224
+                 "x":1564,
+                 "y":8136
                 }, 
                 {
                  "height":544,
@@ -2829,6 +3048,330 @@
                  "width":32,
                  "x":416,
                  "y":5152
+                }, 
+                {
+                 "height":64,
+                 "id":319,
+                 "name":"wall_moving",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"move_speed",
+                         "type":"float",
+                         "value":60
+                        }, 
+                        {
+                         "name":"move_strategy",
+                         "propertytype":"MoveStrategy",
+                         "type":"string",
+                         "value":"pingpong"
+                        }, 
+                        {
+                         "name":"moving",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_01"
+                        }, 
+                        {
+                         "name":"return_speed",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":128,
+                 "x":96,
+                 "y":9827.37059888904
+                }, 
+                {
+                 "height":62.24,
+                 "id":321,
+                 "name":"wall_moving",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"move_speed",
+                         "type":"float",
+                         "value":60
+                        }, 
+                        {
+                         "name":"move_strategy",
+                         "propertytype":"MoveStrategy",
+                         "type":"string",
+                         "value":"pingpong"
+                        }, 
+                        {
+                         "name":"moving",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_02"
+                        }, 
+                        {
+                         "name":"return_speed",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":128,
+                 "x":128,
+                 "y":9696
+                },
+            
+                {
+                 "height":64,
+                 "id":325,
+                 "name":"platform_start",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":192,
+                 "x":224,
+                 "y":10688
+                }, 
+                {
+                 "height":64,
+                 "id":326,
+                 "name":"platform_start",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":224,
+                 "x":192,
+                 "y":10816
+                }, 
+                {
+                 "height":64,
+                 "id":327,
+                 "name":"platform_start",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":160,
+                 "x":224,
+                 "y":10560
+                }, 
+                {
+                 "height":62.24,
+                 "id":329,
+                 "name":"wall_moving",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"move_speed",
+                         "type":"float",
+                         "value":60
+                        }, 
+                        {
+                         "name":"move_strategy",
+                         "propertytype":"MoveStrategy",
+                         "type":"string",
+                         "value":"pingpong"
+                        }, 
+                        {
+                         "name":"moving",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"path_id",
+                         "type":"string",
+                         "value":"path_03"
+                        }, 
+                        {
+                         "name":"return_speed",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":128,
+                 "x":416,
+                 "y":9600
+                }, 
+                {
+                 "height":128,
+                 "id":335,
+                 "name":"wall_keypair",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"key_pair_id",
+                         "type":"string",
+                         "value":"key_final"
+                        }, 
+                        {
+                         "name":"key_pair_result",
+                         "propertytype":"KeyPairResult",
+                         "type":"string",
+                         "value":"solid"
+                        }, 
+                        {
+                         "name":"key_pair_solid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"goal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":128,
+                 "x":96,
+                 "y":9440
+                }, 
+                {
+                 "height":128,
+                 "id":336,
+                 "name":"platform_start",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"image_solid",
+                         "type":"file",
+                         "value":"..\/..\/arts\/walls\/normal_wall.png"
+                        }, 
+                        {
+                         "name":"isSolid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"wall_type",
+                         "type":"string",
+                         "value":"normal"
+                        }],
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":128,
+                 "x":512,
+                 "y":9440
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2843,7 +3386,7 @@
          "objects":[
                 {
                  "height":0,
-                 "id":315,
+                 "id":338,
                  "name":"spawn",
                  "opacity":1,
                  "point":true,
@@ -2862,8 +3405,8 @@
                  "type":"PlayerStart",
                  "visible":true,
                  "width":0,
-                 "x":512,
-                 "y":3840
+                 "x":288,
+                 "y":11200
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2872,7 +3415,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":316,
+ "nextobjectid":339,
  "orientation":"orthogonal",
  "properties":[
         {
