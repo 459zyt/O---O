@@ -19,7 +19,7 @@ from entities.stick import Stick
 from level.level import Level
 from level.level_loader import LevelLoader
 
-from systems.camera import Camera
+from systems.camera import Camera, SeaCameraBob
 from systems.image_manager import ImageManager
 from systems.sound_manager import SoundManager
 from systems.particle_system import ParticleSystem
@@ -62,6 +62,7 @@ class Game:
         self.level = None
         self.stick = None
         self.camera = None
+        self.sea_bob = SeaCameraBob()
 
         # 状态追踪
         self._prev_stick_state = None
@@ -390,6 +391,14 @@ class Game:
         else:
             self.camera.set_target(self.stick.center_y)
         self.camera.update(dt)
+
+        # 海上漂浮晃动
+        self.sea_bob.update(dt)
+        if self.level:
+            stick_y = self.stick.get_anchor_endpoint()[1] if self.stick.state == "anchored" else self.stick.center_y
+            bob_x, bob_y = self.sea_bob.get_offset(stick_y, self.level.lava_y + 90)
+            self.camera.bob_x = bob_x
+            self.camera.bob_y = bob_y
 
         # 屏幕震动衰减
         if self.screen_shake > 0:

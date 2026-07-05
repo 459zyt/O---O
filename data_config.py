@@ -14,8 +14,10 @@ SCREEN_HEIGHT = 600
 FPS = 60
 
 # 视差滚动比 — 远景滚动速度 = 近景 / PARALLAX_RATIO
-# 5 = 玩家爬 500px，背景只移动 100px
-PARALLAX_RATIO = 5
+PARALLAX_RATIO = 10
+
+# 摄像机视角比 — 玩家在屏幕上方多少比例处（0.5=正中，0.6=偏下）
+CAMERA_VIEW_RATIO = 0.6
 
 # =========================
 # 地图格子配置
