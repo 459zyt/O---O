@@ -126,7 +126,7 @@
                  "type":"Hazard",
                  "visible":true,
                  "width":128,
-                 "x":128,
+                 "x":64,
                  "y":4160
                 }, 
                 {
@@ -648,7 +648,7 @@
                         {
                          "name":"checkpoint_id",
                          "type":"string",
-                         "value":"cp_001"
+                         "value":"cp_002"
                         }, 
                         {
                          "name":"consume_on_trigger",
@@ -928,6 +928,7 @@
         {
          "draworder":"topdown",
          "id":2,
+         "locked":true,
          "name":"Walls",
          "objects":[
                 {
@@ -3003,30 +3004,6 @@
          "name":"Player",
          "objects":[
                 {
-                 "height":0,
-                 "id":316,
-                 "name":"spawn",
-                 "opacity":1,
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"anchor_side",
-                         "type":"string",
-                         "value":"left"
-                        }, 
-                        {
-                         "name":"angle",
-                         "type":"float",
-                         "value":270
-                        }],
-                 "rotation":0,
-                 "type":"PlayerStart",
-                 "visible":true,
-                 "width":0,
-                 "x":384,
-                 "y":11264
-                }, 
-                {
                  "height":64,
                  "id":321,
                  "name":"platform_start",
@@ -3109,6 +3086,30 @@
                  "width":64,
                  "x":1337.51548484848,
                  "y":10510.9090909091
+                }, 
+                {
+                 "height":0,
+                 "id":326,
+                 "name":"spawn",
+                 "opacity":1,
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"anchor_side",
+                         "type":"string",
+                         "value":"left"
+                        }, 
+                        {
+                         "name":"angle",
+                         "type":"float",
+                         "value":270
+                        }],
+                 "rotation":0,
+                 "type":"PlayerStart",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":11200
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3117,7 +3118,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":325,
+ "nextobjectid":327,
  "orientation":"orthogonal",
  "properties":[
         {
