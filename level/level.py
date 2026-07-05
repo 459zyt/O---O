@@ -256,9 +256,9 @@ class Level:
         for wall in self.walls:
             wall.update(dt)
         self.update_lava(dt)
-        # 岩浆淹没存档点 → 存档失效
+        # 岩浆淹没存档点 → 存档失效（使用与 is_in_lava 相同的偏移）
         if self.checkpoint_manager.has_checkpoint():
-            self.checkpoint_manager.check_lava_submerged(self.lava_y)
+            self.checkpoint_manager.check_lava_submerged(self.lava_y + 90)
         if stick is not None:
             self.update_item_touch_triggers(stick)
 
