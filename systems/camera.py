@@ -135,12 +135,11 @@ class SeaCameraBob:
     MAX_Y_AMP = 20.0   # 纵向最大漂移像素（靠近海浪时才达到）
 
     # ═══════════════════════════════════════════════════════════════
-    #  纵向灵敏度参数
+    #  纵向衰减 — 离海浪越远晃动越小
+    #  intensity = DECAY ^ d （d=距离海浪的像素数）
+    #  DECAY 越小衰减越快，0.998 表示每 100px 减弱约 18%
     # ═══════════════════════════════════════════════════════════════
-    VERTICAL_INFLUENCE = 400.0  # 纵向影响距离（px），超出此距离纵向晃动消失
-    Y_SPEED_MIN = 0.75         # 远离海浪时的速度倍率
-    Y_SPEED_MAX = 1.80         # 靠近海浪时的速度倍率
-    Y_AMP_GAMMA = 1.3          # 幅度衰减曲线（>1=远处稳定，<1=更早晃动）
+    DECAY = 0.998   # 衰减系数（0~1，<1 越远越弱）
 
     # ================================================================
     #  以下为逻辑代码，美术一般不需要修改
@@ -174,13 +173,14 @@ class SeaCameraBob:
 
     def get_offset(self, current_height, sea_wave_height):
         d = max(0.0, current_height - sea_wave_height)
-        r = smoothstep(1.0 - d / self.VERTICAL_INFLUENCE)
+        # 衰减：intensity = DECAY ^ d，距离越远越弱
+        intensity = self.DECAY ** d
 
         x_norm = self._sum_waves(self.x_waves, 1.0)
         offset_x = self.MAX_X_AMP * x_norm
 
-        amp_y = self.MAX_Y_AMP * (r ** self.Y_AMP_GAMMA)
-        speed_y = self.Y_SPEED_MIN + (self.Y_SPEED_MAX - self.Y_SPEED_MIN) * r
+        amp_y = self.MAX_Y_AMP * intensity
+        speed_y = intensity
         y_norm = self._sum_waves(self.y_waves, speed_y)
         offset_y = amp_y * y_norm
 
