@@ -187,8 +187,8 @@
       "id": "wall_moving",
       "type": "wall",
       "wall_type": "normal",
-      "x": 62,
-      "y": 1234,
+      "x": -51,
+      "y": 1283,
       "width": 138,
       "height": 488,
       "image_solid": "../../arts/walls/normal_wall.png",
@@ -201,12 +201,16 @@
           "start_delay": 0.0,
           "path": [
             [
-              153.275539118723,
-              1506.0267651245
+              18.0,
+              1527.0
             ],
             [
-              433.02749118430745,
-              1574.458083360341
+              -34.69443439436211,
+              1062.228306376792
+            ],
+            [
+              -31.828415815723034,
+              1062.1770123738258
             ]
           ]
         }
@@ -236,7 +240,7 @@
       }
     },
     {
-      "id": "wall_keypair_goal",
+      "id": "wall_keypair",
       "type": "wall",
       "wall_type": "goal",
       "x": 109,
@@ -350,176 +354,8 @@
       "id": "platform_start",
       "type": "wall",
       "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 507,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 509,
-      "y": -479,
-      "width": 94,
-      "height": 1892,
-      "image_solid": "../../arts/walls/normal_wall.png",
-      "image_ghost": "",
-      "isSolid": true
-    },
-    {
-      "id": "platform_start",
-      "type": "wall",
-      "wall_type": "normal",
-      "x": 533,
-      "y": -500,
+      "x": 589,
+      "y": -466,
       "width": 94,
       "height": 1892,
       "image_solid": "../../arts/walls/normal_wall.png",

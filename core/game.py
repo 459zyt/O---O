@@ -73,6 +73,7 @@ class Game:
         self.result_timer = 0.0
         self.pending_events = []
         self._menu_bgm_started = False
+        self._game_bgm_started = False
 
         # 加载素材
         self._load_assets()
@@ -252,8 +253,11 @@ class Game:
         self._prev_stick_state = None
         self.state = GameState.PLAYING
 
-        self.sound_mgr.stop_bgm()
-        self.sound_mgr.play_bgm("arts/sounds/main_theme/celeste_mello.mp3", loop=False)
+        # BGM 只首次进入游戏时播放，重新开始时接着播不打断
+        if not self._game_bgm_started:
+            self._game_bgm_started = True
+            self.sound_mgr.stop_bgm()
+            self.sound_mgr.play_bgm("arts/sounds/main_theme/celeste_mello.mp3", loop=False)
         self.sound_mgr.play("game_start")
 
     def _handle_death(self, cause="lava"):
@@ -365,6 +369,10 @@ class Game:
                     self.queue_event("space")
                 elif self.state == GameState.WIN:
                     self.next_level()
+            elif evt == "test_level":
+                if self.state == GameState.MENU:
+                    self.current_level_id = "level_test"
+                    self.start_game()
             elif evt == "toggle_debug":
                 self.debug = not self.debug
             elif evt == "restart":
@@ -513,6 +521,7 @@ class Game:
         if self.state == GameState.MENU:
             if not self._menu_bgm_started:
                 self._menu_bgm_started = True
+                self._game_bgm_started = False
                 self.sound_mgr.play_bgm("arts/sounds/title_bgm/tide ambient.mp3", loop=True)
             self._draw_menu_bg()
             rdr.draw_main_menu_ui(self.screen, self.fonts, self.menu_time, screen_w, screen_h)

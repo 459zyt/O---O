@@ -36,12 +36,12 @@ class CheckpointManager:
     # ================================================================
 
     def activate_checkpoint(self, level, stick, checkpoint_item):
-        """
-        激活一个存档点。覆盖旧存档记录。
-        """
+        """激活存档点。返回 True 表示是新激活（与当前不同），False 表示重复触发。"""
+        is_new = (self.active_checkpoint_id != checkpoint_item.checkpoint_id)
         self.active_checkpoint_id = checkpoint_item.checkpoint_id
-        self.checkpoint_y = checkpoint_item.y + checkpoint_item.height  # 底部 Y
+        self.checkpoint_y = checkpoint_item.y + checkpoint_item.height
         self.snapshot = self.create_snapshot(level, stick)
+        return is_new
 
     def check_lava_submerged(self, lava_y):
         """如果岩浆淹没存档点，清除存档"""

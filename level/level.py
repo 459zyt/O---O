@@ -148,9 +148,10 @@ class Level:
         """
         if item.effect == "Checkpoint":
             if stick.state == "anchored":
-                self.checkpoint_manager.activate_checkpoint(self, stick, item)
-                from core.event_bus import event_bus
-                event_bus.emit("checkpoint_activated", {})
+                is_new = self.checkpoint_manager.activate_checkpoint(self, stick, item)
+                if is_new:
+                    from core.event_bus import event_bus
+                    event_bus.emit("checkpoint_activated", {})
             return
 
         if item.effect == "KeyPair":
