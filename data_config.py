@@ -80,7 +80,7 @@ GRAVITY_CONFIG = {
 # 岩浆配置
 # =========================
 LAVA_CONFIG = {
-    "start_y_below_player": 200,  # 岩浆初始位置：玩家下方多少像素
+    "start_y_below_player": 300,  # 岩浆初始位置：玩家下方多少像素
     "rise_speed": 25,  # 像素/秒
     "kill_margin": 10,
 }

@@ -274,9 +274,13 @@ class Stick:
             self.velocity_y = -hl * ang_vel * math.cos(self.angle)
 
     def _detach_from_current_wall(self):
-        """通知当前墙壁组件：棍子离开了"""
+        """通知当前墙壁组件：棍子离开了。重心改为两端点中点，避免位置跳变。"""
         if self.attached_wall is not None:
             self.attached_wall.on_anchor_detached(self)
+        # 从锚定→空中时，重心重新计算为两端点中点，保持端点位置不变
+        e0, e1 = self.get_endpoints()
+        self.center_x = (e0[0] + e1[0]) / 2
+        self.center_y = (e0[1] + e1[1]) / 2
         self.attached_wall = None
         self.anchor_local_pos = None
 
