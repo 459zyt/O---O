@@ -885,12 +885,12 @@ def draw_intro_overlay(screen, fonts, timer, screen_w, screen_h):
     cy = screen_h // 2
     alpha = min(255, int(timer * 200))
 
-    draw_text(screen, "SPACE  -  切换锚点", fonts.get("title_small"),
+    draw_text(screen, "SPACE  -  切换锚点", fonts.get("cn_large"),
               (screen_w // 2, cy - 50), text_color="pure_white", center=True, alpha=alpha)
-    draw_text(screen, "R      -  从检查点继续", fonts.get("ui_large"),
-              (screen_w // 2, cy + 10), text_color="ice_cyan", center=True, alpha=alpha)
-    draw_text(screen, "长按 R  -  从关卡起点重新开始", fonts.get("ui_small"),
-              (screen_w // 2, cy + 60), text_color="miss_gray", center=True, alpha=alpha)
+    draw_text(screen, "R      -  从检查点继续", fonts.get("cn_medium"),
+              (screen_w // 2, cy + 15), text_color="ice_cyan", center=True, alpha=alpha)
+    draw_text(screen, "长按 R  -  从关卡起点重新开始", fonts.get("cn_small"),
+              (screen_w // 2, cy + 65), text_color="miss_gray", center=True, alpha=alpha)
 
 
 def draw_dead_overlay(screen, fonts, time_seconds, screen_w, screen_h):
