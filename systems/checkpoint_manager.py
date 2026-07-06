@@ -38,12 +38,11 @@ class CheckpointManager:
     # ================================================================
 
     def activate_checkpoint(self, level, stick, checkpoint_item):
-        """激活存档点。锁定状态下拒绝新存档。返回 True=新激活，False=重复或拒绝。"""
-        if self.snapshot_locked:
-            return False
+        """激活存档点。新存档点总是覆盖旧的，被淹的旧存档点不影响新存档。"""
         is_new = (self.active_checkpoint_id != checkpoint_item.checkpoint_id)
         self.active_checkpoint_id = checkpoint_item.checkpoint_id
         self.checkpoint_y = checkpoint_item.y + checkpoint_item.height
+        self.snapshot_locked = False  # 新存档点未被淹
         self.snapshot = self.create_snapshot(level, stick)
         return is_new
 
