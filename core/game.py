@@ -469,15 +469,13 @@ class Game:
             self.camera.bob_x += (target_x - self.camera.bob_x) * smooth
             self.camera.bob_y += (target_y - self.camera.bob_y) * smooth
 
-        # 长按 R 检测 — 5 秒自动重置 + 进度提示
+        # 长按 R 检测 — 5 秒自动重置，1 秒后显示进度
         if self.input_mgr.r_press_time is not None:
             held = self.input_mgr.r_held_seconds()
             if held >= 5.0:
                 self.input_mgr.r_press_time = None
                 self.start_game()
                 return
-            elif held > 0.5:
-                self._spawn_bubble_at_stick("reset")
 
         # 屏幕震动衰减
         if self.screen_shake > 0:
@@ -563,6 +561,10 @@ class Game:
                              self.camera.y, now, screen_w, screen_h, self.bubbles)
             if self.intro_timer > 0:
                 rdr.draw_intro_overlay(self.screen, self.fonts, self.intro_timer, screen_w, screen_h)
+            # 长按 R 进度提示
+            held = self.input_mgr.r_held_seconds()
+            if held > 1.0:
+                rdr.draw_reset_indicator(self.screen, self.fonts, held, screen_w, screen_h)
 
         elif self.state == GameState.WIN:
             self._draw_game_scene()

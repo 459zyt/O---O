@@ -903,6 +903,29 @@ def draw_intro_overlay(screen, fonts, timer, screen_w, screen_h):
               (screen_w // 2, cy + 65), text_color="miss_gray", center=True, alpha=alpha)
 
 
+def draw_reset_indicator(screen, fonts, held, screen_w, screen_h):
+    """长按 R 重置进度 — 固定红色大字，越接近 5s 越红越大"""
+    progress = min(1.0, held / 5.0)
+    r = int(255)
+    g = int(255 * (1.0 - progress))
+    b = int(255 * (1.0 - progress))
+    alpha = int(180 + 75 * progress)
+    scale = 1.0 + progress * 0.6
+
+    surf_text = "RESET..."
+    font = fonts.get("cn_large")
+    if font is None:
+        return
+    text = font.render(surf_text, True, (r, g, b))
+    w = int(text.get_width() * scale)
+    h = int(text.get_height() * scale)
+    scaled = pygame.transform.scale(text, (w, h))
+    scaled.set_alpha(alpha)
+    x = screen_w // 2 - w // 2
+    y = screen_h - 120
+    screen.blit(scaled, (x, y))
+
+
 def draw_dead_overlay(screen, fonts, time_seconds, screen_w, screen_h):
     """死亡结算界面"""
     # 暗红覆盖
