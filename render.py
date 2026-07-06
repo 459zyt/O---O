@@ -876,6 +876,23 @@ def draw_win_overlay(screen, fonts, time_seconds, screen_w, screen_h):
     )
 
 
+def draw_intro_overlay(screen, fonts, timer, screen_w, screen_h):
+    """入场操作提示 — 2 秒倒计时"""
+    overlay = pygame.Surface((screen_w, screen_h), pygame.SRCALPHA)
+    overlay.fill((*c("overlay_dark"), 180))
+    screen.blit(overlay, (0, 0))
+
+    cy = screen_h // 2
+    alpha = min(255, int(timer * 200))
+
+    draw_text(screen, "SPACE  -  切换锚点", fonts.get("title_small"),
+              (screen_w // 2, cy - 50), text_color="pure_white", center=True, alpha=alpha)
+    draw_text(screen, "R      -  从检查点继续", fonts.get("ui_large"),
+              (screen_w // 2, cy + 10), text_color="ice_cyan", center=True, alpha=alpha)
+    draw_text(screen, "长按 R  -  从关卡起点重新开始", fonts.get("ui_small"),
+              (screen_w // 2, cy + 60), text_color="miss_gray", center=True, alpha=alpha)
+
+
 def draw_dead_overlay(screen, fonts, time_seconds, screen_w, screen_h):
     """死亡结算界面"""
     # 暗红覆盖

@@ -262,6 +262,8 @@ class Game:
         self.result_timer = 0.0
         self._prev_stick_state = None
         self.state = GameState.PLAYING
+        # 首次从菜单进入 → 显示操作提示 2 秒
+        self.intro_timer = 2.0 if not self._game_bgm_started else 0.0
 
         # BGM 循环播放
         if not self._game_bgm_started:
@@ -413,6 +415,11 @@ class Game:
             self.bubbles.update(dt)
             return
 
+        # 入场提示计时
+        if self.intro_timer > 0:
+            self.intro_timer -= dt
+            return
+
         # PLAYING 状态 — 检测状态变化
         if self._prev_stick_state is not None:
             if self._prev_stick_state == "airborne" and self.stick.state == "anchored":
@@ -546,6 +553,8 @@ class Game:
             self._draw_game_scene()
             rdr.draw_game_ui(self.screen, self.fonts, self.stick, self.level,
                              self.camera.y, now, screen_w, screen_h, self.bubbles)
+            if self.intro_timer > 0:
+                rdr.draw_intro_overlay(self.screen, self.fonts, self.intro_timer, screen_w, screen_h)
 
         elif self.state == GameState.WIN:
             self._draw_game_scene()
