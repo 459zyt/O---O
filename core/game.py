@@ -263,8 +263,10 @@ class Game:
         self.result_timer = 0.0
         self._prev_stick_state = None
         self.state = GameState.PLAYING
-        # 首次从菜单进入 → 显示操作提示 2 秒
         self.intro_timer = 2.0 if not self._game_bgm_started else 0.0
+        # 冻结岩浆初始位置，提示结束后才上升
+        if self.intro_timer > 0:
+            self._frozen_lava_y = self.level.lava_y
 
         # BGM 循环播放
         if not self._game_bgm_started:
@@ -416,7 +418,8 @@ class Game:
         # 入场提示期间冻结所有游戏逻辑（包括岩浆）
         if self.intro_timer > 0:
             self.intro_timer -= dt
-            return  # level.update() 不会执行，岩浆不涨
+            self.level.lava_y = self._frozen_lava_y  # 强制冻结
+            return
 
         # PLAYING 状态 — 检测状态变化
         if self._prev_stick_state is not None:
@@ -585,12 +588,15 @@ class Game:
         pygame.display.flip()
 
     def _draw_game_scene(self):
-        """绘制游戏场景 — 摄像机偏移 + 海上漂浮"""
-        self._draw_bg()
+        """绘制游戏场景 — 全部在扩展表面渲染，摄像机偏移时背景也跟随"""
+        pad = 120
+        wide_w = SCREEN_WIDTH + pad * 2
         cam_y = self.camera.y + int(self.camera.bob_y)
         offset_x = int(-self.camera.x + self.camera.bob_x)
-        pad = 120
-        tmp = pygame.Surface((SCREEN_WIDTH + pad * 2, SCREEN_HEIGHT), pygame.SRCALPHA)
+
+        # 扩展表面：背景 + 游戏对象一起偏移
+        tmp = pygame.Surface((wide_w, SCREEN_HEIGHT))
+        self._draw_bg(tmp, cam_y, wide_w)
         self.level.draw(tmp, cam_y, self.image_mgr.images, self.image_mgr)
         self.particles.draw(tmp, cam_y)
         self.stick.draw(tmp, cam_y, self.image_mgr.images)
@@ -620,30 +626,31 @@ class Game:
             scaled = pygame.transform.scale(lava_img, (SCREEN_WIDTH, wave_h))
             self.screen.blit(scaled, (0, SCREEN_HEIGHT - wave_h))
 
-    def _draw_bg(self):
-        """绘制背景：远景以 PARALLAX_RATIO:1 慢速滚动，近景全速"""
+    def _draw_bg(self, target=None, cam_y=0, wide_w=None):
+        """绘制背景到 target（默认 screen）"""
+        if target is None:
+            target = self.screen
         bg = self.image_mgr.get("level_bg")
         sky = self.image_mgr.get("sky")
-        screen_w, screen_h = SCREEN_WIDTH, SCREEN_HEIGHT
+        w = wide_w or SCREEN_WIDTH
+        h = SCREEN_HEIGHT
         p_y = self.camera.y / PARALLAX_RATIO
 
-        # 1. 天空无限平铺（远景速度）
         if sky:
-            sky_h = int(sky.get_height() * SCREEN_WIDTH / sky.get_width())
-            sky_scaled = pygame.transform.scale(sky, (SCREEN_WIDTH, sky_h))
+            sky_h = int(sky.get_height() * w / sky.get_width())
+            sky_scaled = pygame.transform.scale(sky, (w, sky_h))
             y = - (p_y % sky_h)
-            while y < screen_h:
-                self.screen.blit(sky_scaled, (0, int(y)))
+            while y < h:
+                target.blit(sky_scaled, (0, int(y)))
                 y += sky_h
         else:
-            self.screen.fill(C_BG)
+            target.fill(C_BG)
 
-        # 2. 背景图底部对齐地图底部（远景速度）
         if bg:
-            bg_h = int(bg.get_height() * SCREEN_WIDTH / bg.get_width())
-            bg_scaled = pygame.transform.scale(bg, (SCREEN_WIDTH, bg_h))
+            bg_h = int(bg.get_height() * w / bg.get_width())
+            bg_scaled = pygame.transform.scale(bg, (w, bg_h))
             bg_screen_y = self.level.height / PARALLAX_RATIO - p_y
-            self.screen.blit(bg_scaled, (0, bg_screen_y - bg_h))
+            target.blit(bg_scaled, (0, bg_screen_y - bg_h))
 
     # ---- 主循环 ----
     def run(self):
